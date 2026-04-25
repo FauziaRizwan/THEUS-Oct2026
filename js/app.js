@@ -182,11 +182,11 @@
       scrub: true,
       onUpdate: (self) => {
         const p = self.progress;
-        // Hero fades out quickly
-        heroSection.style.opacity = Math.max(0, 1 - p * 15);
+        // Hero fades out very quickly as scroll begins
+        heroSection.style.opacity = Math.max(0, 1 - p * 25);
 
-        // Canvas reveals via expanding circle
-        const wipeProgress = Math.min(1, Math.max(0, (p - 0.01) / 0.06));
+        // Canvas reveals via expanding circle — starts almost immediately
+        const wipeProgress = Math.min(1, Math.max(0, (p - 0.003) / 0.04));
         const radius = wipeProgress * 75;
         canvasWrap.style.clipPath = `circle(${radius}% at 50% 50%)`;
       },
@@ -438,28 +438,57 @@
   // ═══════════════════════════════════════════════════
   function initMobileMenu() {
     const btn = document.getElementById("mobile-menu-btn");
-    const links = document.querySelector(".nav-links");
-    if (!btn || !links) return;
+    const megaMenu = document.getElementById("mega-menu");
+    if (!btn || !megaMenu) return;
+
+    let isOpen = false;
+
+    function openMenu() {
+      isOpen = true;
+      btn.classList.add("is-open");
+      megaMenu.style.display = "flex";
+      // Force reflow for transition
+      megaMenu.offsetHeight;
+      megaMenu.classList.add("is-open");
+      document.body.style.overflow = "hidden";
+      lenis.stop();
+    }
+
+    function closeMenu() {
+      isOpen = false;
+      btn.classList.remove("is-open");
+      megaMenu.classList.remove("is-open");
+      document.body.style.overflow = "";
+      lenis.start();
+      // Wait for transition then hide
+      setTimeout(() => {
+        if (!isOpen) megaMenu.style.display = "none";
+      }, 400);
+    }
 
     btn.addEventListener("click", () => {
-      const isOpen = links.style.display === "flex";
-      links.style.display = isOpen ? "none" : "flex";
-      links.style.flexDirection = "column";
-      links.style.position = "fixed";
-      links.style.top = "var(--header-h)";
-      links.style.left = "0";
-      links.style.right = "0";
-      links.style.background = "rgba(13,13,13,0.96)";
-      links.style.backdropFilter = "blur(12px)";
-      links.style.padding = "2rem 5vw";
-      links.style.gap = "1.5rem";
-      links.style.zIndex = "999";
-
-      if (!isOpen) {
-        links.style.display = "flex";
+      if (isOpen) {
+        closeMenu();
       } else {
-        links.style.display = "none";
+        openMenu();
       }
+    });
+
+    // Close on link click and smooth scroll
+    megaMenu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", (e) => {
+        closeMenu();
+        const href = link.getAttribute("href");
+        if (href && href.startsWith("#")) {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
+            setTimeout(() => {
+              lenis.scrollTo(target, { offset: 0, duration: 1.2 });
+            }, 450);
+          }
+        }
+      });
     });
   }
 
