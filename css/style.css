@@ -868,7 +868,7 @@ img { max-width: 100%; display: block; }
 
   /* Hero */
   .hero-heading {
-    font-size: clamp(3rem, 12vw, 5rem);
+    font-size: clamp(2.1rem, 8.5vw, 3.5rem);
   }
 
   /* Scroll sections collapse to centered with backdrop */
@@ -924,7 +924,7 @@ img { max-width: 100%; display: block; }
 }
 
 @media (max-width: 480px) {
-  .hero-heading { font-size: clamp(2.5rem, 14vw, 3.5rem); }
+  .hero-heading { font-size: clamp(1.75rem, 10vw, 2.5rem); }
   .section-heading { font-size: clamp(1.8rem, 6vw, 2.4rem); }
   .stat-number { font-size: clamp(2rem, 10vw, 3rem); }
   .story-number { font-size: 2.5rem; }

@@ -8,7 +8,8 @@
 
   // ── Configuration ──
   const FRAME_COUNT = 229;
-  const FRAME_SPEED = 2.0;
+  const isMobile = window.innerWidth <= 768;
+  const FRAME_SPEED = isMobile ? 2.5 : 2.0;
   const IMAGE_SCALE = 0.85;
   const FRAME_PATH = (i) => `frames/frame_${String(i).padStart(4, "0")}.webp`;
 
@@ -183,10 +184,14 @@
       onUpdate: (self) => {
         const p = self.progress;
         // Hero fades out very quickly as scroll begins
-        heroSection.style.opacity = Math.max(0, 1 - p * 25);
+        const fadeMultiplier = isMobile ? 50 : 25;
+        heroSection.style.opacity = Math.max(0, 1 - p * fadeMultiplier);
 
-        // Canvas reveals via expanding circle — starts almost immediately
-        const wipeProgress = Math.min(1, Math.max(0, (p - 0.003) / 0.04));
+        // Canvas reveals via expanding circle
+        // On mobile: starts immediately with no offset
+        const wipeOffset = isMobile ? 0 : 0.003;
+        const wipeDuration = isMobile ? 0.025 : 0.04;
+        const wipeProgress = Math.min(1, Math.max(0, (p - wipeOffset) / wipeDuration));
         const radius = wipeProgress * 75;
         canvasWrap.style.clipPath = `circle(${radius}% at 50% 50%)`;
       },
@@ -286,7 +291,18 @@
   }
 
   function initSections() {
-    document.querySelectorAll(".scroll-section").forEach(setupSectionAnimation);
+    document.querySelectorAll(".scroll-section").forEach((section) => {
+      // On mobile, shift all enter/leave values earlier so animations
+      // start as soon as the user begins scrolling
+      if (isMobile) {
+        const origEnter = parseFloat(section.dataset.enter);
+        const origLeave = parseFloat(section.dataset.leave);
+        // Scale down by ~40% so sections appear much sooner
+        section.dataset.enter = String(Math.max(0, origEnter * 0.4));
+        section.dataset.leave = String(origLeave * 0.55);
+      }
+      setupSectionAnimation(section);
+    });
   }
 
   // ═══════════════════════════════════════════════════
@@ -327,9 +343,15 @@
   function initMarquees() {
     document.querySelectorAll(".marquee-wrap").forEach((el) => {
       const speed = parseFloat(el.dataset.scrollSpeed) || -25;
-      const enter = parseFloat(el.dataset.enter) / 100;
-      const leave = parseFloat(el.dataset.leave) / 100;
+      let enter = parseFloat(el.dataset.enter) / 100;
+      let leave = parseFloat(el.dataset.leave) / 100;
       const fadeRange = 0.04;
+
+      // Shift marquee timing earlier on mobile
+      if (isMobile) {
+        enter = enter * 0.4;
+        leave = leave * 0.55;
+      }
 
       gsap.to(el.querySelector(".marquee-text"), {
         xPercent: speed,
@@ -368,8 +390,8 @@
   // 10. DARK OVERLAY
   // ═══════════════════════════════════════════════════
   function initDarkOverlay() {
-    const enter = 0.42;
-    const leave = 0.62;
+    const enter = isMobile ? 0.17 : 0.42;
+    const leave = isMobile ? 0.34 : 0.62;
     const fadeRange = 0.04;
 
     ScrollTrigger.create({
