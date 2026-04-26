@@ -183,8 +183,11 @@
       scrub: true,
       onUpdate: (self) => {
         const p = self.progress;
-        // Hero fades out very quickly as scroll begins
-        const fadeMultiplier = isMobile ? 50 : 25;
+        
+        // Hero fades out slower to merge with the first section content
+        // Desktop: Gone by p=0.12 (approx 12% scroll progress)
+        // Mobile: Gone by p=0.08
+        const fadeMultiplier = isMobile ? 12 : 8;
         heroSection.style.opacity = Math.max(0, 1 - p * fadeMultiplier);
 
         // Canvas reveals via expanding circle

@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════════════
    THE URBAN SOLUTIONS — Refined Dark Editorial
-   Typography: Syne (Display) + DM Sans (Body)
+   Typography: League Spartan (Display) + Roboto (Body)
    ═══════════════════════════════════════════════════ */
 
 /* ── Reset ── */
@@ -21,8 +21,8 @@
   --accent-dim: #96784a;
 
   /* Typography */
-  --font-display: 'Syne', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
+  --font-display: 'League Spartan', sans-serif;
+  --font-body: 'Roboto', sans-serif;
 
   /* Spacing */
   --header-h: 72px;
@@ -35,6 +35,7 @@ html {
 
 body {
   font-family: var(--font-body);
+  font-weight: 500;
   background: var(--bg-dark);
   color: var(--text-on-dark);
   overflow-x: hidden;
@@ -105,10 +106,115 @@ img { max-width: 100%; display: block; }
   display: flex;
   align-items: center;
   padding: 0 5vw;
-  mix-blend-mode: difference;
   transition: opacity 0.4s ease;
 }
+
+/* Background image layer */
+.header-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.header-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  filter: brightness(0.45) saturate(1.2);
+}
+
+/* Animated gradient blobs — green & maroon glassmorphism */
+.header-glass-blobs {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+.glass-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(30px);
+  opacity: 0.5;
+  will-change: transform;
+}
+.blob-green {
+  width: 200px;
+  height: 100px;
+  background: radial-gradient(ellipse, rgba(34, 197, 94, 0.45) 0%, rgba(16, 185, 129, 0.15) 60%, transparent 100%);
+  top: -20px;
+  left: 10%;
+  animation: blobDrift1 8s ease-in-out infinite alternate;
+}
+.blob-maroon {
+  width: 250px;
+  height: 110px;
+  background: radial-gradient(ellipse, rgba(128, 0, 32, 0.5) 0%, rgba(153, 27, 50, 0.18) 55%, transparent 100%);
+  top: -15px;
+  right: 15%;
+  animation: blobDrift2 10s ease-in-out infinite alternate;
+}
+.blob-green-2 {
+  width: 180px;
+  height: 90px;
+  background: radial-gradient(ellipse, rgba(74, 222, 128, 0.35) 0%, rgba(34, 197, 94, 0.1) 60%, transparent 100%);
+  top: -10px;
+  left: 55%;
+  animation: blobDrift3 12s ease-in-out infinite alternate;
+}
+
+@keyframes blobDrift1 {
+  0%   { transform: translate(0, 0) scale(1); }
+  25%  { transform: translate(40px, 8px) scale(1.1); }
+  50%  { transform: translate(-20px, 5px) scale(0.95); }
+  75%  { transform: translate(60px, -5px) scale(1.05); }
+  100% { transform: translate(-30px, 10px) scale(1.15); }
+}
+@keyframes blobDrift2 {
+  0%   { transform: translate(0, 0) scale(1); }
+  30%  { transform: translate(-50px, 10px) scale(1.08); }
+  60%  { transform: translate(30px, -8px) scale(0.92); }
+  100% { transform: translate(-40px, 5px) scale(1.12); }
+}
+@keyframes blobDrift3 {
+  0%   { transform: translate(0, 0) scale(1); }
+  35%  { transform: translate(35px, -6px) scale(1.1); }
+  65%  { transform: translate(-45px, 12px) scale(0.9); }
+  100% { transform: translate(20px, -4px) scale(1.05); }
+}
+
+/* Gradient overlay for depth */
+.header-gradient-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    135deg,
+    rgba(128, 0, 32, 0.25) 0%,
+    rgba(13, 13, 13, 0.4) 40%,
+    rgba(34, 197, 94, 0.12) 70%,
+    rgba(13, 13, 13, 0.5) 100%
+  );
+}
+
+/* Dark overlay for text legibility */
+.header-dark-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+    180deg,
+    rgba(13, 13, 13, 0.2) 0%,
+    rgba(13, 13, 13, 0.45) 100%
+  );
+  backdrop-filter: blur(6px) saturate(1.4);
+  -webkit-backdrop-filter: blur(6px) saturate(1.4);
+}
+
+/* Nav sits above all layers */
 .site-header nav {
+  position: relative;
+  z-index: 5;
   width: 100%;
   display: flex;
   align-items: center;
@@ -206,9 +312,19 @@ img { max-width: 100%; display: block; }
   justify-content: center;
   background: var(--bg-dark);
   padding: 0 5vw;
+  overflow: hidden;
 }
 .hero-inner {
+  position: relative;
+  z-index: 10;
   max-width: 900px;
+}
+.hero-bg-parallax {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
 }
 .hero-heading {
   font-family: var(--font-display);
@@ -254,6 +370,7 @@ img { max-width: 100%; display: block; }
   position: absolute;
   bottom: 3vh;
   left: 5vw;
+  z-index: 10;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -374,9 +491,14 @@ img { max-width: 100%; display: block; }
 .align-left .section-inner,
 .align-right .section-inner {
   max-width: 40vw;
+  background: rgba(13, 13, 13, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 2.5rem;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
 }
 
-/* Section inner typography */
 .section-inner .section-label {
   display: inline-block;
   font-family: var(--font-body);
@@ -386,6 +508,7 @@ img { max-width: 100%; display: block; }
   letter-spacing: 0.18em;
   color: var(--accent);
   margin-bottom: 1rem;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
 }
 .section-heading {
   font-family: var(--font-display);
@@ -394,14 +517,16 @@ img { max-width: 100%; display: block; }
   line-height: 1.05;
   letter-spacing: -0.02em;
   margin-bottom: 1rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
 }
 .section-body {
   font-family: var(--font-body);
   font-size: clamp(0.95rem, 1.1vw, 1.15rem);
   line-height: 1.7;
-  color: var(--text-muted);
+  color: #ffffff;
   font-weight: 400;
   max-width: 36ch;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
 }
 
 /* CTA Button */
