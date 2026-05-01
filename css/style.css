@@ -253,7 +253,7 @@ img { max-width: 100%; display: block; }
   bottom: -4px; left: 0;
   width: 0;
   height: 1px;
-  background: var(--accent);
+  background: var(--brand-green);
   transition: width 0.3s ease;
 }
 .nav-links a:hover::after { width: 100%; }
@@ -267,7 +267,7 @@ img { max-width: 100%; display: block; }
 }
 .nav-cta::after { display: none !important; }
 .nav-cta:hover {
-  background: var(--accent-bright) !important;
+  background: var(--brand-green) !important;
 }
 
 /* Mobile menu button */
@@ -546,9 +546,9 @@ img { max-width: 100%; display: block; }
   transition: all 0.35s ease;
 }
 .cta-button:hover {
-  background: var(--accent-bright);
+  background: var(--brand-green);
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(247, 168, 0, 0.25);
+  box-shadow: 0 8px 30px rgba(140, 198, 63, 0.25);
 }
 
 /* ── Stats Section ── */
@@ -651,7 +651,7 @@ img { max-width: 100%; display: block; }
   transition: border-color 0.4s ease, transform 0.4s ease;
 }
 .team-card:hover {
-  border-color: rgba(247, 168, 0, 0.25);
+  border-color: rgba(140, 198, 63, 0.35);
   transform: translateY(-4px);
 }
 .team-avatar {
@@ -713,7 +713,7 @@ img { max-width: 100%; display: block; }
   transition: border-color 0.4s ease, transform 0.4s ease;
 }
 .story-card:hover {
-  border-color: rgba(247, 168, 0, 0.2);
+  border-color: rgba(140, 198, 63, 0.3);
   transform: translateY(-3px);
 }
 .story-card::before {
@@ -722,7 +722,7 @@ img { max-width: 100%; display: block; }
   top: 0; left: 0;
   width: 4px;
   height: 0;
-  background: var(--accent);
+  background: var(--brand-green);
   transition: height 0.5s ease;
 }
 .story-card:hover::before {
@@ -790,13 +790,13 @@ img { max-width: 100%; display: block; }
   left: 0;
   width: 100%;
   height: 1px;
-  background: var(--accent);
+  background: var(--brand-green);
   transform: translateX(-101%);
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .story-card:hover .story-read-more {
-  color: var(--accent);
+  color: var(--brand-green);
 }
 
 .story-card:hover .story-read-more .arrow {
@@ -870,7 +870,7 @@ img { max-width: 100%; display: block; }
   transition: color 0.3s;
   margin-bottom: 1.2rem;
 }
-.footer-email:hover { color: var(--accent-bright); }
+.footer-email:hover { color: var(--brand-green); }
 .footer-socials {
   display: flex;
   gap: 0.8rem;
@@ -887,7 +887,7 @@ img { max-width: 100%; display: block; }
   transition: all 0.3s ease;
 }
 .social-link:hover {
-  background: var(--accent);
+  background: var(--brand-green);
   color: var(--bg-dark);
 }
 .footer-bottom {
@@ -991,7 +991,7 @@ img { max-width: 100%; display: block; }
   position: relative;
 }
 .mega-link:hover {
-  color: var(--accent);
+  color: var(--brand-green);
   transform: translateX(12px);
 }
 .mega-link::before {
@@ -1002,7 +1002,7 @@ img { max-width: 100%; display: block; }
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--accent);
+  background: var(--brand-green);
   transform: translateY(-50%) scale(0);
   transition: transform 0.3s ease;
 }
@@ -1019,6 +1019,28 @@ img { max-width: 100%; display: block; }
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--text-muted-dark);
+}
+
+.scroll-to-top {
+  position: absolute;
+  right: 5vw;
+  bottom: 2rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--bg-dark);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 100;
+}
+.scroll-to-top:hover {
+  background: var(--brand-green);
+  transform: translateY(-5px);
 }
 
 /* ===================================================
