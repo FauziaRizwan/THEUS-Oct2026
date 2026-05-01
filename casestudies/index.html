@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Case Studies — The Urban Solutions</title>
+  <meta name="description" content="Landmark projects where vision met execution. Explore our urban development case studies.">
+
+  <!-- Fonts: League Spartan (Display) + Roboto (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700;800&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400;1,500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/style.css">
+  
+  <style>
+    /* Case Studies Specific Styles */
+    .hero-casestudies {
+      position: relative;
+      z-index: 5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: var(--bg-dark);
+      padding: 0 5vw;
+      overflow: hidden;
+    }
+    
+    .hero-casestudies::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 80% 20%, rgba(247, 168, 0, 0.15) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .cs-hero-inner {
+      position: relative;
+      z-index: 10;
+      max-width: 1000px;
+    }
+    
+    .cs-hero-heading {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(3.5rem, 8vw, 8rem);
+      line-height: 0.9;
+      letter-spacing: -0.04em;
+      margin-bottom: 1.5rem;
+      color: #fff;
+    }
+    
+    .cs-section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 15vh 5vw;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    /* Background Color Zones */
+    .cs-light { background: var(--bg-light); color: var(--text-on-light); }
+    .cs-dark { background: var(--bg-dark); color: var(--text-on-dark); }
+    .cs-accent { background: var(--bg-accent); color: var(--text-on-dark); }
+
+    .cs-light .cs-label { color: var(--accent-dim); }
+    .cs-dark .cs-label, .cs-accent .cs-label { color: var(--accent); }
+    
+    .cs-light .cs-title { color: var(--text-on-light); }
+    .cs-dark .cs-title, .cs-accent .cs-title { color: #fff; }
+    
+    .cs-light .cs-desc { color: var(--text-muted-dark); }
+    .cs-dark .cs-desc, .cs-accent .cs-desc { color: var(--text-muted); }
+
+    .cs-label {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      margin-bottom: 1.5rem;
+    }
+    
+    .cs-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(3rem, 5vw, 5rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 2rem;
+    }
+
+    .cs-subtitle {
+      display: block;
+      font-family: var(--font-body);
+      font-size: clamp(1.2rem, 2vw, 1.8rem);
+      font-weight: 400;
+      line-height: 1.4;
+      margin-top: 0.8rem;
+    }
+    .cs-light .cs-subtitle { color: var(--text-muted-dark); }
+    .cs-dark .cs-subtitle, .cs-accent .cs-subtitle { color: var(--text-muted); }
+    
+    .cs-desc {
+      font-family: var(--font-body);
+      font-size: clamp(1rem, 1.2vw, 1.25rem);
+      line-height: 1.7;
+      max-width: 700px;
+      margin-bottom: 3rem;
+    }
+
+    /* Pillars / Highlights */
+    .cs-highlights {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2.5rem;
+      margin-bottom: 3.5rem;
+      max-width: 1000px;
+    }
+    .highlight {
+      border-left: 2px solid var(--accent);
+      padding-left: 1.2rem;
+    }
+    .highlight h4 {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+    .highlight p {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      opacity: 0.85;
+    }
+
+    /* Specification Table */
+    .cs-spec-wrap {
+      max-width: 800px;
+    }
+    .cs-spec-label {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .cs-spec-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .cs-spec-table th, .cs-spec-table td {
+      padding: 1.2rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid rgba(247, 168, 0, 0.15);
+    }
+    .cs-light .cs-spec-table th, .cs-light .cs-spec-table td { border-bottom-color: rgba(0,0,0,0.08); }
+
+    .cs-spec-table th {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      width: 35%;
+      vertical-align: top;
+    }
+    .cs-light .cs-spec-table th { color: var(--accent-dim); }
+
+    .cs-spec-table td {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+    .cs-light .cs-spec-table td { color: var(--text-on-light); }
+    .cs-dark .cs-spec-table td, .cs-accent .cs-spec-table td { color: #fff; }
+
+    /* Layout Varieties */
+    .cs-layout-left { justify-content: flex-start; text-align: left; }
+    .cs-layout-right { justify-content: flex-end; text-align: left; }
+    
+    .cs-layout-right .cs-desc,
+    .cs-layout-right .cs-highlights,
+    .cs-layout-right .cs-spec-wrap { margin-left: auto; }
+
+    /* Huge Number Watermark */
+    .cs-watermark {
+      position: absolute;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 45vw;
+      line-height: 0.8;
+      opacity: 0.03;
+      z-index: 0;
+      pointer-events: none;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .cs-light .cs-watermark { color: var(--text-on-light); opacity: 0.04; }
+    .cs-dark .cs-watermark, .cs-accent .cs-watermark { color: #fff; }
+    
+    .cs-layout-left .cs-watermark { right: -5%; }
+    .cs-layout-right .cs-watermark { left: -5%; }
+    
+    .cs-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1400px;
+    }
+    
+    /* Horizontal Marquee for Case Studies */
+    .cs-marquee-section {
+      padding: 10vh 0;
+      background: var(--bg-dark);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+    .cs-marquee-text {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 15vw;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: rgba(247, 168, 0, 0.08);
+      white-space: nowrap;
+      will-change: transform;
+    }
+    
+    /* Initial state for GSAP reveals */
+    .gsap-reveal { opacity: 0; transform: translateY(40px); }
+  </style>
+</head>
+<body>
+
+  <!-- ============ FIXED HEADER ============ -->
+  <header class="site-header" id="site-header" style="background: rgba(13, 13, 13, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+    <nav>
+      <a href="../index.html" class="logo">
+        <img src="../frames/logo.png" alt="The Urban Solutions" class="nav-logo-img">
+      </a>
+      <ul class="nav-links">
+        <li><a href="../index.html#about-section">About</a></li>
+        <li><a href="../index.html#team-section">Team</a></li>
+        <li><a href="../index.html#stories-section">Stories</a></li>
+        <li><a href="../index.html#contact-section" class="nav-cta">Let's Talk</a></li>
+      </ul>
+      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- ============ MOBILE MEGA MENU ============ -->
+  <div class="mega-menu" id="mega-menu">
+    <div class="mega-menu-inner">
+      <div class="mega-menu-section">
+        <span class="mega-menu-label">Navigation</span>
+        <ul class="mega-menu-links">
+          <li><a href="../index.html" class="mega-link">Home</a></li>
+          <li><a href="../index.html#about-section" class="mega-link">About Us</a></li>
+          <li><a href="../index.html#team-section" class="mega-link">Our Team</a></li>
+          <li><a href="../index.html#stories-section" class="mega-link">Success Stories</a></li>
+        </ul>
+      </div>
+      <div class="mega-menu-section">
+        <span class="mega-menu-label">Get In Touch</span>
+        <ul class="mega-menu-links">
+          <li><a href="../index.html#contact-section" class="mega-link">Contact Us</a></li>
+          <li><a href="mailto:info@theurbansolutions.com" class="mega-link">Email Us</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero-casestudies">
+    <div class="hero-logo-container gsap-hero">
+      <img src="../frames/logo.png" alt="The Urban Solutions Logo" class="hero-logo-img">
+    </div>
+    
+    <div class="cs-hero-inner">
+      <span class="section-label gsap-hero" style="display:inline-block; font-family:var(--font-body); font-size:0.75rem; font-weight:600; text-transform:uppercase; letter-spacing:0.2em; color:var(--accent); margin-bottom:1.5rem;">002 / Portfolio</span>
+      <h1 class="cs-hero-heading gsap-hero">
+        <span style="display:block; color:var(--text-muted)">Landmark</span>
+        <span style="display:block; color:var(--accent); font-style:italic; padding-left:10%;">Realities</span>
+      </h1>
+      <p class="hero-tagline gsap-hero" style="font-family:var(--font-body); font-size:clamp(1.1rem, 1.5vw, 1.3rem); color:var(--text-muted); max-width:600px; line-height:1.6; margin-top:2rem;">At Urban Solutions, we don't just draw maps; we engineer ecosystems. Explore how our feasibility-first design and regulatory precision shape Pakistan's most ambitious master plans.</p>
+    </div>
+    
+    <div class="scroll-indicator gsap-hero" style="position:absolute; bottom:5vh; left:5vw;">
+      <span>Scroll to explore</span>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 5v14M5 12l7 7 7-7"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ============ CASE STUDY 1: FAISAL TOWN 2 ============ -->
+  <section class="cs-section cs-dark cs-layout-left" id="cs-1">
+    <div class="cs-watermark">01</div>
+    <div class="cs-content">
+      <span class="cs-label gsap-reveal">Precision Urbanism on a Grand Scale</span>
+      <h2 class="cs-title gsap-reveal">Faisal Town 2<br>
+        <span class="cs-subtitle">Redefining the Gateway to the Twin Cities.</span>
+      </h2>
+      <p class="cs-desc gsap-reveal">Spanning an unprecedented 80,000+ kanals, Faisal Town 2 is not just a housing scheme; it is a meticulously planned metropolitan extension. Urban Solutions has engineered a master plan that harmonizes the high-velocity connectivity of the M-2 Motorway with the serenity of modern suburban living.</p>
+      
+      <div class="cs-highlights gsap-reveal">
+        <div class="highlight">
+          <h4>The 350ft Great Boulevard</h4>
+          <p>Designed for fluid traffic management and aesthetic grandeur, acting as the spine of the community.</p>
+        </div>
+        <div class="highlight">
+          <h4>The Central Business District</h4>
+          <p>A dedicated economic engine designed to house Pakistan’s next generation of corporate headquarters.</p>
+        </div>
+        <div class="highlight">
+          <h4>Green-Block Integration</h4>
+          <p>Every sector features a dedicated park, ensuring a "Green Lung" within walking distance for every resident.</p>
+        </div>
+      </div>
+      
+      <div class="cs-spec-wrap gsap-reveal">
+        <span class="cs-spec-label">Technical Edge</span>
+        <table class="cs-spec-table">
+          <tbody>
+            <tr>
+              <th>Total Area</th>
+              <td>80,000 - 200,000 Kanals</td>
+            </tr>
+            <tr>
+              <th>Strategic Location</th>
+              <td>0 km from Thalian Interchange (M-2)</td>
+            </tr>
+            <tr>
+              <th>Consultancy Scope</th>
+              <td>Master Planning & Layout Design</td>
+            </tr>
+            <tr>
+              <th>Key Infrastructure</th>
+              <td>Underground Utilities & Smart Drainage</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CASE STUDY 2: DHA QUETTA ============ -->
+  <section class="cs-section cs-light cs-layout-right" id="cs-2">
+    <div class="cs-watermark">02</div>
+    <div class="cs-content">
+      <span class="cs-label gsap-reveal">The Smart City Frontier</span>
+      <h2 class="cs-title gsap-reveal">DHA Quetta<br>
+        <span class="cs-subtitle">Setting the Gold Standard for Balochistan.</span>
+      </h2>
+      <p class="cs-desc gsap-reveal">As the first-ever Defense Housing Authority project in Balochistan, DHA Quetta represents a historic shift in regional urban development. Urban Solutions integrated "Smart City" principles into the master plan to tackle the unique geographical and environmental challenges of the Quetta plateau.</p>
+      
+      <div class="cs-highlights gsap-reveal">
+        <div class="highlight">
+          <h4>Zonal Specialization</h4>
+          <p>A tri-zonal plan separating High-Street Commerce (Zone A), Education & Health Excellence (Zone B), and Leisure Farmhouses (Zone C).</p>
+        </div>
+        <div class="highlight">
+          <h4>Resource Resilience</h4>
+          <p>Implementation of smart water management and energy-efficient grids to ensure long-term sustainability in a semi-arid climate.</p>
+        </div>
+        <div class="highlight">
+          <h4>Institutional Hub</h4>
+          <p>Strategic allocation for NUST and Cardiac Centers, transforming the society into a self-sustaining regional node.</p>
+        </div>
+      </div>
+      
+      <div class="cs-spec-wrap gsap-reveal">
+        <span class="cs-spec-label">Technical Edge</span>
+        <table class="cs-spec-table">
+          <tbody>
+            <tr>
+              <th>Zoning Model</th>
+              <td>Tri-Zonal (Residential, Institutional, Leisure)</td>
+            </tr>
+            <tr>
+              <th>Primary Arteries</th>
+              <td>316-foot Expressway & 240-foot Parkways</td>
+            </tr>
+            <tr>
+              <th>Sustainability</th>
+              <td>Smart Waste & Water Management Systems</td>
+            </tr>
+            <tr>
+              <th>Strategic Access</th>
+              <td>Main RCD Highway & CPEC Corridor Proximity</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  
+  <!-- ============ HORIZONTAL MARQUEE ============ -->
+  <section class="cs-marquee-section">
+    <div class="cs-marquee-text" id="cs-marquee">
+      FUTURE PROOFING — REGULATORY PRECISION — SOCIO-ECONOMIC UPLIFT — FEASIBILITY-FIRST DESIGN —
+    </div>
+  </section>
+
+  <!-- ============ CASE STUDY 3: RAHMAN ENCLAVE ============ -->
+  <section class="cs-section cs-accent cs-layout-left" id="cs-3">
+    <div class="cs-watermark">03</div>
+    <div class="cs-content">
+      <span class="cs-label gsap-reveal">Bespoke Boutique Living</span>
+      <h2 class="cs-title gsap-reveal">Rahman Enclave<br>
+        <span class="cs-subtitle">Where Strategic Connectivity Meets Elite Privacy.</span>
+      </h2>
+      <p class="cs-desc gsap-reveal">Rahman Enclave is a testament to the "Boutique Community" model. Urban Solutions navigated complex CDA regulatory frameworks to deliver a Layout Plan (LOP) that maximizes land utility while maintaining an intimate, high-end aesthetic. It is a masterclass in urban infill and strategic land usage.</p>
+      
+      <div class="cs-highlights gsap-reveal">
+        <div class="highlight">
+          <h4>CDA Zone 4 Compliance</h4>
+          <p>A legally seamless development designed within the rigorous standards of the Capital Development Authority.</p>
+        </div>
+        <div class="highlight">
+          <h4>Ecological Stewardship</h4>
+          <p>Over 15% of the total land is dedicated to open green spaces and parks, significantly higher than standard regulatory requirements.</p>
+        </div>
+        <div class="highlight">
+          <h4>Integrated Connectivity</h4>
+          <p>Engineered for immediate access to the GT Road, bridging the gap between Rawalpindi’s commercial pulse and Islamabad’s administrative heart.</p>
+        </div>
+      </div>
+      
+      <div class="cs-spec-wrap gsap-reveal">
+        <span class="cs-spec-label">Technical Edge</span>
+        <table class="cs-spec-table">
+          <tbody>
+            <tr>
+              <th>Project Type</th>
+              <td>Premium Gated Community</td>
+            </tr>
+            <tr>
+              <th>Location</th>
+              <td>Zone 4, GT Road, Islamabad</td>
+            </tr>
+            <tr>
+              <th>Regulatory Status</th>
+              <td>CDA Approved (LOP & NOC)</td>
+            </tr>
+            <tr>
+              <th>Community Focus</th>
+              <td>Pedestrian-Friendly Green Belts</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CASE STUDY 4: DHA PHASE III ============ -->
+  <section class="cs-section cs-dark cs-layout-right" id="cs-4">
+    <div class="cs-watermark">04</div>
+    <div class="cs-content">
+      <span class="cs-label gsap-reveal">Environmental Integration</span>
+      <h2 class="cs-title gsap-reveal">DHA Phase III<br>
+        <span class="cs-subtitle">Contemporary Luxury in the Margalla Foothills.</span>
+      </h2>
+      <p class="cs-desc gsap-reveal">Strategic planning and design consultancy for DHA Phase III Islamabad — a premium development that beautifully integrates contemporary architectural standards with the natural, undulating landscape of the Margalla foothills, balancing luxury living with environmental preservation.</p>
+      
+      <div class="cs-highlights gsap-reveal">
+        <div class="highlight">
+          <h4>Topographical Master Planning</h4>
+          <p>Aligning infrastructural flow with natural terrain to minimize environmental impact and reduce earthwork disruptions.</p>
+        </div>
+        <div class="highlight">
+          <h4>Premium Residential Zones</h4>
+          <p>Architecturally controlled enclaves ensuring high-end aesthetic uniformity and unparalleled living experiences.</p>
+        </div>
+        <div class="highlight">
+          <h4>Ecosystem Preservation</h4>
+          <p>Dedicated green belts and eco-corridors integrated seamlessly into the community framework.</p>
+        </div>
+      </div>
+      
+      <div class="cs-spec-wrap gsap-reveal">
+        <span class="cs-spec-label">Technical Edge</span>
+        <table class="cs-spec-table">
+          <tbody>
+            <tr>
+              <th>Project Type</th>
+              <td>Premium Defence Housing</td>
+            </tr>
+            <tr>
+              <th>Location</th>
+              <td>Margalla Foothills, Islamabad</td>
+            </tr>
+            <tr>
+              <th>Investment Orchestrated</th>
+              <td>50M+ Tier Valuations</td>
+            </tr>
+            <tr>
+              <th>Core Focus</th>
+              <td>Topography Preservation & Luxury</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER / CONTACT -->
+  <footer class="site-footer" id="contact-section">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <img src="../frames/logo.png" alt="The Urban Solutions" class="footer-logo-img">
+          </div>
+          <p class="footer-tagline">From Plan to Execution.<br>Your success is our blueprint.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Navigate</h4>
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../index.html#about-section">About</a></li>
+            <li><a href="../index.html#team-section">Our Team</a></li>
+            <li><a href="#">Case Studies</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4>Get In Touch</h4>
+          <p>Ready to start your next project?</p>
+          <a href="mailto:info@theurbansolutions.com" class="footer-email">info@theurbansolutions.com</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 The Urban Solutions. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+  
+  <script>
+    // 1. Initialize Lenis for Smooth Scrolling
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      direction: 'vertical',
+      gestureDirection: 'vertical',
+      smooth: true,
+      mouseMultiplier: 1,
+      smoothTouch: false,
+      touchMultiplier: 2,
+      infinite: false,
+    });
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    // 2. GSAP Animations
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Hero Entry Animation
+    gsap.from(".gsap-hero", {
+      y: 60,
+      opacity: 0,
+      duration: 1.2,
+      stagger: 0.15,
+      ease: "power3.out",
+      delay: 0.2
+    });
+
+    // Case Study Sections Reveal
+    const sections = document.querySelectorAll(".cs-section");
+    sections.forEach((sec) => {
+      const reveals = sec.querySelectorAll(".gsap-reveal");
+      
+      // Text and content reveal
+      gsap.to(reveals, {
+        scrollTrigger: {
+          trigger: sec,
+          start: "top 80%",
+        },
+        y: 0,
+        opacity: 1,
+        duration: 1.2,
+        stagger: 0.12,
+        ease: "power3.out"
+      });
+      
+      // Watermark Parallax Effect
+      const watermark = sec.querySelector(".cs-watermark");
+      if(watermark) {
+        gsap.to(watermark, {
+          scrollTrigger: {
+            trigger: sec,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1
+          },
+          y: -150,
+          ease: "none"
+        });
+      }
+    });
+    
+    // Marquee Horizontal Scroll
+    const marqueeText = document.getElementById('cs-marquee');
+    if (marqueeText) {
+      gsap.to(marqueeText, {
+        scrollTrigger: {
+          trigger: ".cs-marquee-section",
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1
+        },
+        x: "-15%",
+        ease: "none"
+      });
+    }
+    
+    // Mobile Menu Toggle
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const megaMenu = document.getElementById('mega-menu');
+    if(menuBtn && megaMenu) {
+      menuBtn.addEventListener('click', () => {
+        menuBtn.classList.toggle('is-open');
+        megaMenu.classList.toggle('is-open');
+      });
+      
+      // Close menu on link click
+      const menuLinks = megaMenu.querySelectorAll('.mega-link');
+      menuLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          menuBtn.classList.remove('is-open');
+          megaMenu.classList.remove('is-open');
+        });
+      });
+    }
+  </script>
+</body>
+</html>

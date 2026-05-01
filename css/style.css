@@ -16,9 +16,10 @@
   --text-on-dark: #f0ede8;
   --text-muted: #8a857d;
   --text-muted-dark: #6b665e;
-  --accent: #c8a96e;
-  --accent-bright: #e0c489;
-  --accent-dim: #96784a;
+  --accent: #F7A800; /* Logo Golden */
+  --accent-bright: #FFB71C;
+  --accent-dim: #B37A00;
+  --brand-green: #8CC63F; /* Logo Green */
 
   /* Typography */
   --font-display: 'League Spartan', sans-serif;
@@ -441,7 +442,7 @@ img { max-width: 100%; display: block; }
   font-size: 12vw;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: rgba(200, 169, 110, 0.06);
+  color: rgba(247, 168, 0, 0.06);
   white-space: nowrap;
   will-change: transform;
 }
@@ -547,7 +548,7 @@ img { max-width: 100%; display: block; }
 .cta-button:hover {
   background: var(--accent-bright);
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(200, 169, 110, 0.25);
+  box-shadow: 0 8px 30px rgba(247, 168, 0, 0.25);
 }
 
 /* ── Stats Section ── */
@@ -646,11 +647,11 @@ img { max-width: 100%; display: block; }
   padding: 3rem 2.5rem;
   background: var(--bg-card);
   border-radius: 12px;
-  border: 1px solid rgba(200, 169, 110, 0.08);
+  border: 1px solid rgba(247, 168, 0, 0.08);
   transition: border-color 0.4s ease, transform 0.4s ease;
 }
 .team-card:hover {
-  border-color: rgba(200, 169, 110, 0.25);
+  border-color: rgba(247, 168, 0, 0.25);
   transform: translateY(-4px);
 }
 .team-avatar {
@@ -712,7 +713,7 @@ img { max-width: 100%; display: block; }
   transition: border-color 0.4s ease, transform 0.4s ease;
 }
 .story-card:hover {
-  border-color: rgba(200, 169, 110, 0.2);
+  border-color: rgba(247, 168, 0, 0.2);
   transform: translateY(-3px);
 }
 .story-card::before {
@@ -731,7 +732,7 @@ img { max-width: 100%; display: block; }
   font-family: var(--font-display);
   font-weight: 800;
   font-size: 3.5rem;
-  color: rgba(200, 169, 110, 0.1);
+  color: rgba(247, 168, 0, 0.1);
   line-height: 1;
   margin-bottom: 0.8rem;
 }
@@ -756,9 +757,54 @@ img { max-width: 100%; display: block; }
   text-transform: uppercase;
   letter-spacing: 0.1em;
   padding: 5px 14px;
-  border: 1px solid rgba(200, 169, 110, 0.2);
+  border: 1px solid rgba(247, 168, 0, 0.2);
   border-radius: 20px;
   color: var(--accent);
+}
+
+.story-read-more {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 2rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 2px;
+}
+
+.story-read-more .arrow {
+  margin-left: 8px;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-block;
+}
+
+.story-read-more::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--accent);
+  transform: translateX(-101%);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.story-card:hover .story-read-more {
+  color: var(--accent);
+}
+
+.story-card:hover .story-read-more .arrow {
+  transform: translateX(6px);
+}
+
+.story-card:hover .story-read-more::after {
+  transform: translateX(0);
 }
 
 /* ═══════════════════════════════════════════════════
@@ -975,6 +1021,45 @@ img { max-width: 100%; display: block; }
   color: var(--text-muted-dark);
 }
 
+/* ===================================================
+   LOGO STYLES
+   =================================================== */
+.nav-logo-img {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+}
+
+.footer-logo-img {
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+  margin-bottom: 0.5rem;
+}
+
+.hero-logo-container {
+  position: absolute;
+  right: 8vw;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 15;
+  pointer-events: auto;
+}
+
+.hero-logo-img {
+  width: 280px;
+  max-width: 30vw;
+  height: auto;
+  object-fit: contain;
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: drop-shadow(0 0 0 rgba(140, 198, 63, 0));
+}
+
+.hero-logo-img:hover {
+  transform: scale(1.08) rotate(1deg);
+  filter: drop-shadow(0 15px 35px rgba(140, 198, 63, 0.35)); /* Brand Green glow */
+}
+
 /* ═══════════════════════════════════════════════════
    RESPONSIVE
    ═══════════════════════════════════════════════════ */
@@ -990,6 +1075,8 @@ img { max-width: 100%; display: block; }
 
   .nav-links { display: none; }
   .mobile-menu-btn { display: flex; }
+
+  .hero-logo-container { display: none; }
 
   /* Hero */
   .hero-heading {
