@@ -18,7 +18,6 @@
   const loaderBar = document.getElementById("loader-bar");
   const loaderPercent = document.getElementById("loader-percent");
   const heroSection = document.getElementById("hero-standalone");
-  const canvasWrap = document.getElementById("canvas-wrap");
   const canvas = document.getElementById("canvas");
   const ctx = canvas.getContext("2d");
   const scrollContainer = document.getElementById("scroll-container");
@@ -173,30 +172,21 @@
   }
 
   // ═══════════════════════════════════════════════════
-  // 5. CIRCLE-WIPE HERO → CANVAS TRANSITION
+  // 5. HERO → CANVAS CROSSFADE
   // ═══════════════════════════════════════════════════
   function initHeroTransition() {
+    // Canvas is always visible underneath the hero. As the hero scrolls,
+    // its opacity dissolves to reveal the canvas frame below — and since
+    // frame 1 matches the hero's background image, this reads as a seamless
+    // crossfade rather than a hard wipe.
     ScrollTrigger.create({
-      trigger: scrollContainer,
+      trigger: heroSection,
       start: "top top",
-      end: "bottom bottom",
+      end: "bottom top",
       scrub: true,
       onUpdate: (self) => {
         const p = self.progress;
-        
-        // Hero fades out slower to merge with the first section content
-        // Desktop: Gone by p=0.12 (approx 12% scroll progress)
-        // Mobile: Gone by p=0.08
-        const fadeMultiplier = isMobile ? 12 : 8;
-        heroSection.style.opacity = Math.max(0, 1 - p * fadeMultiplier);
-
-        // Canvas reveals via expanding circle
-        // On mobile: starts immediately with no offset
-        const wipeOffset = isMobile ? 0 : 0.003;
-        const wipeDuration = isMobile ? 0.025 : 0.04;
-        const wipeProgress = Math.min(1, Math.max(0, (p - wipeOffset) / wipeDuration));
-        const radius = wipeProgress * 75;
-        canvasWrap.style.clipPath = `circle(${radius}% at 50% 50%)`;
+        heroSection.style.opacity = Math.max(0, 1 - Math.pow(p, 0.85));
       },
     });
   }
@@ -294,18 +284,25 @@
   }
 
   function initSections() {
-    document.querySelectorAll(".scroll-section").forEach((section) => {
-      // On mobile, shift all enter/leave values earlier so animations
-      // start as soon as the user begins scrolling
-      if (isMobile) {
-        const origEnter = parseFloat(section.dataset.enter);
-        const origLeave = parseFloat(section.dataset.leave);
-        // Scale down by ~40% so sections appear much sooner
-        section.dataset.enter = String(Math.max(0, origEnter * 0.4));
-        section.dataset.leave = String(origLeave * 0.55);
-      }
-      setupSectionAnimation(section);
-    });
+    const sections = document.querySelectorAll(".scroll-section");
+    if (isMobile) {
+      // Hand-tuned mobile timings: even spacing across the scroll, ~3pt gap
+      // between sections so headings never overlap.
+      const mobileTimings = [
+        { enter: 5,  leave: 25 },   // Section 1: From Plan to Execution
+        { enter: 28, leave: 48 },   // Section 2: Not Just Your Designer
+        { enter: 52, leave: 72 },   // Section 3: Stats
+        { enter: 76, leave: 100 },  // Section 4: CTA (persistent)
+      ];
+      sections.forEach((section, i) => {
+        const t = mobileTimings[i];
+        if (t) {
+          section.dataset.enter = String(t.enter);
+          section.dataset.leave = String(t.leave);
+        }
+      });
+    }
+    sections.forEach((section) => setupSectionAnimation(section));
   }
 
   // ═══════════════════════════════════════════════════
@@ -350,10 +347,11 @@
       let leave = parseFloat(el.dataset.leave) / 100;
       const fadeRange = 0.04;
 
-      // Shift marquee timing earlier on mobile
+      // Mobile marquee timings — pair Marquee 1 with Section 2 and
+      // Marquee 2 with the CTA, matching the desktop pairing intent.
       if (isMobile) {
-        enter = enter * 0.4;
-        leave = leave * 0.55;
+        if (el.id === "marquee-1") { enter = 0.30; leave = 0.50; }
+        else if (el.id === "marquee-2") { enter = 0.74; leave = 0.96; }
       }
 
       gsap.to(el.querySelector(".marquee-text"), {
@@ -393,8 +391,8 @@
   // 10. DARK OVERLAY
   // ═══════════════════════════════════════════════════
   function initDarkOverlay() {
-    const enter = isMobile ? 0.17 : 0.42;
-    const leave = isMobile ? 0.34 : 0.62;
+    const enter = isMobile ? 0.50 : 0.42;
+    const leave = isMobile ? 0.74 : 0.62;
     const fadeRange = 0.04;
 
     ScrollTrigger.create({
