@@ -26,7 +26,7 @@
   --font-body: 'Roboto', sans-serif;
 
   /* Spacing */
-  --header-h: 72px;
+  --header-h: 80px;
 }
 
 html {
@@ -1025,16 +1025,16 @@ img { max-width: 100%; display: block; }
    LOGO STYLES
    =================================================== */
 .nav-logo-img {
-  height: 40px;
+  height: 45px;
   width: auto;
   object-fit: contain;
 }
 
 .footer-logo-img {
-  height: 60px;
+  height: 90px;
   width: auto;
   object-fit: contain;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .hero-logo-container {
@@ -1136,6 +1136,7 @@ img { max-width: 100%; display: block; }
 }
 
 @media (max-width: 480px) {
+  .nav-logo-img { height: 35px; }
   .hero-heading { font-size: clamp(1.75rem, 10vw, 2.5rem); }
   .section-heading { font-size: clamp(1.8rem, 6vw, 2.4rem); }
   .stat-number { font-size: clamp(2rem, 10vw, 3rem); }
