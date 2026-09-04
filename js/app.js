@@ -74,16 +74,46 @@
     const slideCount = mediaEls.length;
     let currentIndex = 0;
 
-    // Text swaps discretely (class toggle, CSS handles the quick fade) so
-    // two headings are never visible at once. Background images crossfade
-    // continuously in the full experience — see onUpdate below.
+    // Lines within each slide's content block that animate in/out as a
+    // staggered group (heading, description, tag, CTA).
+    const ANIM_LINES_SELECTOR =
+      ".hero-slide-eyebrow, .hero-slide-title, .hero-slide-desc, .hero-slide-tag, .hero-slide-cta";
+
+    function animateLinesIn(contentEl) {
+      gsap.fromTo(
+        contentEl.querySelectorAll(ANIM_LINES_SELECTOR),
+        { opacity: 0, y: 28 },
+        { opacity: 1, y: 0, duration: 0.7, ease: "power3.out", stagger: 0.07, overwrite: true }
+      );
+    }
+
+    function animateLinesOut(contentEl) {
+      gsap.to(contentEl.querySelectorAll(ANIM_LINES_SELECTOR), {
+        opacity: 0,
+        y: -20,
+        duration: 0.35,
+        ease: "power2.in",
+        overwrite: true,
+      });
+    }
+
+    // Text swaps discretely per-slide so two headings are never visible at
+    // once. The container's .is-active class handles a CSS-only fallback
+    // fade (reduced-motion/no-JS); when motion is enabled, the individual
+    // lines additionally animate in/out with a staggered fade + rise.
     function setActiveUI(index) {
+      const prevIndex = currentIndex;
       currentIndex = index;
       dots.forEach((dot, i) => {
         dot.classList.toggle("is-active", i === index);
         dot.setAttribute("aria-selected", i === index ? "true" : "false");
       });
       contentEls.forEach((el, i) => el.classList.toggle("is-active", i === index));
+
+      if (!prefersReducedMotion && prevIndex !== index) {
+        animateLinesOut(contentEls[prevIndex]);
+        animateLinesIn(contentEls[index]);
+      }
     }
 
     // ── Reduced motion: no pin, no scrub — instant/faded slide swap ──
@@ -102,7 +132,10 @@
     }
 
     // ── Full experience: pin the hero and scrub between slides ──
-    const vhPerSlide = isMobile ? 0.75 : 1;
+    // Slightly more scroll distance per slide than a bare image crossfade
+    // would need, so there's time to read each project's animated-in
+    // description before it transitions out.
+    const vhPerSlide = isMobile ? 0.95 : 1.25;
 
     const st = ScrollTrigger.create({
       trigger: heroSlider,
@@ -190,7 +223,7 @@
     });
 
     // Cards get staggered reveal
-    const cards = document.querySelectorAll(".stat, .team-card, .story-card");
+    const cards = document.querySelectorAll(".stat, .team-card");
 
     const observer = new IntersectionObserver(
       (entries) => {

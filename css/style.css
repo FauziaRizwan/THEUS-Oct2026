@@ -251,8 +251,23 @@ img { max-width: 100%; display: block; }
   );
 }
 
-/* Text layer — swaps per-slide with a quick fade (not a continuous
-   blend), so two headings are never legible on screen at once */
+/* Persistent section label — identifies the merged hero/stories section,
+   revealed once on load via the shared .reveal-up system (app.js) */
+.hero-static-heading {
+  position: absolute;
+  z-index: 4;
+  top: calc(var(--header-h) + 2rem);
+  left: 5vw;
+}
+.hero-static-heading .section-label-static {
+  margin-bottom: 0;
+}
+
+/* Text layer — swaps per-slide (no continuous blend), so two headings
+   are never legible on screen at once. The container toggles instantly
+   via .is-active (CSS-only fallback for reduced-motion/no-JS); the
+   individual lines (eyebrow/title/desc/tag/cta) are animated in and out
+   with a staggered fade+rise by GSAP in app.js for the full experience. */
 .hero-slide-content {
   position: absolute;
   z-index: 3;
@@ -293,15 +308,43 @@ img { max-width: 100%; display: block; }
   color: var(--accent);
   font-style: italic;
 }
+.hero-slide-desc {
+  font-family: var(--font-body);
+  font-size: clamp(0.85rem, 1.3vw, 1rem);
+  line-height: 1.65;
+  color: rgba(240, 237, 232, 0.78);
+  max-width: 620px;
+  margin-bottom: 1.1rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.hero-slide-tag {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 5px 14px;
+  border: 1px solid rgba(247, 168, 0, 0.35);
+  border-radius: 20px;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+}
 .hero-slide-cta {
   margin-top: 0;
+  display: block;
 }
 
 /* Prev / next arrows — vertically centered, clear of top nav and
    bottom text zone, inset enough to avoid the edge back-swipe gesture */
 .hero-nav-arrow {
   position: absolute;
-  top: 50%;
+  /* Sits in the upper part of the frame, clear of the (now taller, with
+     description + tag) bottom-anchored text block on every slide. */
+  top: 38%;
   transform: translateY(-50%);
   z-index: 6;
   width: 48px;
@@ -541,80 +584,6 @@ img { max-width: 100%; display: block; }
   font-size: 0.95rem;
   line-height: 1.7;
   color: var(--text-muted);
-}
-
-/* ── Stories Section ── */
-.stories-section {
-  background: var(--bg-dark);
-}
-.stories-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-}
-.stories-grid .story-card:nth-child(5) {
-  grid-column: 1 / -1;
-}
-.stories-grid .story-card:nth-child(5) .story-desc {
-  max-width: 85ch;
-}
-.story-card {
-  padding: 2.5rem;
-  background: var(--bg-accent);
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.04);
-  position: relative;
-  overflow: hidden;
-  transition: border-color 0.4s ease, transform 0.4s ease;
-}
-.story-card:hover {
-  border-color: rgba(140, 198, 63, 0.3);
-  transform: translateY(-3px);
-}
-.story-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 4px;
-  height: 0;
-  background: var(--brand-green);
-  transition: height 0.5s ease;
-}
-.story-card:hover::before {
-  height: 100%;
-}
-.story-number {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 3.5rem;
-  color: rgba(247, 168, 0, 0.1);
-  line-height: 1;
-  margin-bottom: 0.8rem;
-}
-.story-title {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1.4rem;
-  margin-bottom: 0.8rem;
-}
-.story-desc {
-  font-family: var(--font-body);
-  font-size: 0.9rem;
-  line-height: 1.65;
-  color: var(--text-muted);
-  margin-bottom: 1.2rem;
-}
-.story-tag {
-  display: inline-block;
-  font-family: var(--font-body);
-  font-size: 0.7rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  padding: 5px 14px;
-  border: 1px solid rgba(247, 168, 0, 0.2);
-  border-radius: 20px;
-  color: var(--accent);
 }
 
 .story-read-more {
@@ -959,9 +928,11 @@ img { max-width: 100%; display: block; }
 
   .hero-logo-container { display: none; } /* casestudies hero */
 
-  /* Hero slider — tighter arrow inset, dots row clears the CTA below it */
+  /* Hero slider — tighter arrow inset, higher up to clear the taller
+     (3-line desc) text block, dots row clears the CTA below it */
   .hero-nav-prev { left: 16px; }
   .hero-nav-next { right: 16px; }
+  .hero-nav-arrow { top: 28%; }
   .hero-slider-dots {
     right: auto;
     left: 5vw;
@@ -970,6 +941,12 @@ img { max-width: 100%; display: block; }
   .hero-slide-content {
     bottom: clamp(5.5rem, 17vh, 7rem);
     max-width: 100%;
+  }
+  .hero-slide-desc {
+    -webkit-line-clamp: 3;
+  }
+  .hero-static-heading {
+    top: calc(var(--header-h) + 1.2rem);
   }
 
   /* Stats */
@@ -983,11 +960,6 @@ img { max-width: 100%; display: block; }
     grid-template-columns: 1fr;
   }
 
-  /* Stories */
-  .stories-grid {
-    grid-template-columns: 1fr;
-  }
-
   /* Footer */
   .footer-grid {
     grid-template-columns: 1fr;
@@ -998,8 +970,7 @@ img { max-width: 100%; display: block; }
 @media (max-width: 480px) {
   .nav-logo-img { height: 35px; }
   .hero-slide-title { font-size: clamp(1.9rem, 9vw, 2.6rem); }
+  .hero-slide-desc { display: none; }
   .stat-number { font-size: clamp(2rem, 10vw, 3rem); }
-  .story-number { font-size: 2.5rem; }
   .team-card { padding: 2rem 1.5rem; }
-  .story-card { padding: 1.8rem; }
 }

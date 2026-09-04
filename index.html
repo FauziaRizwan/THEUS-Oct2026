@@ -33,7 +33,7 @@
       <ul class="nav-links">
         <li><a href="#about-section">About</a></li>
         <li><a href="#team-section">Team</a></li>
-        <li><a href="#stories-section">Stories</a></li>
+        <li><a href="#hero-slider">Stories</a></li>
         <li><a href="#contact-section" class="nav-cta">Let's Talk</a></li>
       </ul>
       <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu">
@@ -67,10 +67,12 @@
     </div>
   </div>
 
-  <!-- ============ HERO PROJECT SLIDER ============ -->
+  <!-- ============ HERO PROJECT SLIDER + PAST SUCCESS STORIES (merged) ============ -->
   <!-- Background images crossfade continuously with scroll; text content
-       swaps per-slide (no double-exposed headings during the blend). -->
-  <section class="hero-slider" id="hero-slider" aria-roledescription="carousel" aria-label="Featured Projects">
+       (heading, description, tag, CTA) animates in/out per-slide as the
+       user scrolls through all 5 projects — no double-exposed headings
+       during the transition. -->
+  <section class="hero-slider" id="hero-slider" aria-roledescription="carousel" aria-label="Featured Projects — Past Success Stories">
     <div class="hero-slide-media is-active" data-index="0">
       <img src="images/projects/faisal-town-islamabad.webp" alt="Faisal Town, Islamabad" class="hero-slide-img" style="object-position: center center;" loading="eager">
     </div>
@@ -89,29 +91,43 @@
 
     <div class="hero-slide-gradient"></div>
 
+    <div class="hero-static-heading">
+      <span class="section-label-static">Portfolio</span>
+    </div>
+
     <div class="hero-slide-content is-active" data-index="0">
       <span class="hero-slide-eyebrow">01 &mdash; Faisal Town, Islamabad</span>
       <h1 class="hero-slide-title">Faisal Town<br><span class="accent">Islamabad</span></h1>
+      <p class="hero-slide-desc">Comprehensive master planning and infrastructure design for a large-scale residential township on Islamabad's growth corridor &mdash; built around green spaces, modern utilities, and a self-sufficient commercial core.</p>
+      <span class="hero-slide-tag">Township Development</span>
       <a href="casestudies/" class="cta-button hero-slide-cta">View Project &rarr;</a>
     </div>
     <div class="hero-slide-content" data-index="1">
       <span class="hero-slide-eyebrow">02 &mdash; Aviation City, Kamra</span>
       <h1 class="hero-slide-title">Aviation City<br><span class="accent">Kamra</span></h1>
+      <p class="hero-slide-desc">Strategic master planning for a specialized aviation-industrial township adjoining Kamra's aerospace complex &mdash; balancing industrial, residential, and commercial zones within a highly regulated framework.</p>
+      <span class="hero-slide-tag">Master Planning</span>
       <a href="casestudies/" class="cta-button hero-slide-cta">View Project &rarr;</a>
     </div>
     <div class="hero-slide-content" data-index="2">
       <span class="hero-slide-eyebrow">03 &mdash; Defence Housing Authority, Quetta</span>
       <h1 class="hero-slide-title">DHA<br><span class="accent">Quetta</span></h1>
+      <p class="hero-slide-desc">Zoning, master planning, and detailed infrastructure design for a 12,500-acre development bordering Quetta city &mdash; climate-resilient, water-conservative planning that unlocks CPEC's economic potential.</p>
+      <span class="hero-slide-tag">Urban Planning</span>
       <a href="casestudies/" class="cta-button hero-slide-cta">View Project &rarr;</a>
     </div>
     <div class="hero-slide-content" data-index="3">
       <span class="hero-slide-eyebrow">04 &mdash; Citi Housing, Jhelum &amp; Kharian</span>
       <h1 class="hero-slide-title">Citi Housing<br><span class="accent">Kharian</span></h1>
+      <p class="hero-slide-desc">Master planning and infrastructure design across Hyde Park, Eiffel Tower, Emerald Hills, and Citi Housing Kharian &mdash; a guarded, gated estate woven together by considered zones for schools, mosques, and commerce.</p>
+      <span class="hero-slide-tag">Residential Estate</span>
       <a href="casestudies/" class="cta-button hero-slide-cta">View Project &rarr;</a>
     </div>
     <div class="hero-slide-content" data-index="4">
       <span class="hero-slide-eyebrow">05 &mdash; Rahman Enclave, CDA NOC</span>
       <h1 class="hero-slide-title">Rahman Enclave<br><span class="accent">CDA NOC</span></h1>
+      <p class="hero-slide-desc">Full-cycle project management for Rahman Enclave's CDA No Objection Certificate compliance &mdash; navigating regulatory frameworks to deliver a high-quality residential enclave in the capital territory.</p>
+      <span class="hero-slide-tag">CDA Approved</span>
       <a href="casestudies/" class="cta-button hero-slide-cta">View Project &rarr;</a>
     </div>
 
@@ -193,62 +209,6 @@
           <span class="team-role">Managing Director</span>
           <p class="team-bio">Fauzia Rizwan brings operational mastery and a meticulous eye for detail to every project. As Managing Director, she oversees end-to-end project delivery &mdash; ensuring timelines, budgets, and quality benchmarks are not just met, but exceeded. Her ability to harmonize creative ambition with practical execution has been instrumental in building lasting relationships with clients and partners alike.</p>
           <a href="team/fauzia-rizwan/" class="story-read-more">View Profile <span class="arrow">&rarr;</span></a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PAST SUCCESS STORIES -->
-  <section class="page-section stories-section" id="stories-section">
-    <div class="container">
-      <span class="section-label-static">Portfolio</span>
-      <h2 class="page-heading">Past Success Stories</h2>
-      <p class="page-subheading">A selection of landmark projects where vision met execution.</p>
-
-      <div class="stories-grid">
-        <div class="story-card" id="story-1">
-          <div class="story-number">01</div>
-          <h3 class="story-title">Defence Housing Authority, Quetta</h3>
-          <p class="story-desc">Zoning plan, master planning, and detailed infrastructure design for a 12,500-acre development bordering Quetta city &mdash; climate-resilient, water-conservative planning that recycles city greywater for irrigation while unlocking CPEC's economic potential.</p>
-          <span class="story-tag">Urban Planning</span>
-          <br>
-          <a href="casestudies/" class="story-read-more">Read More <span class="arrow">&rarr;</span></a>
-        </div>
-
-        <div class="story-card" id="story-2">
-          <div class="story-number">02</div>
-          <h3 class="story-title">Faisal Town Phase II</h3>
-          <p class="story-desc">End-to-end planning and execution of Faisal Town Phase II &mdash; a large-scale residential township featuring modern infrastructure, green spaces, and commercial zones designed for sustainable community living.</p>
-          <span class="story-tag">Township Development</span>
-          <br>
-          <a href="casestudies/" class="story-read-more">Read More <span class="arrow">&rarr;</span></a>
-        </div>
-
-        <div class="story-card" id="story-3">
-          <div class="story-number">03</div>
-          <h3 class="story-title">DHA Phase III &mdash; Islamabad</h3>
-          <p class="story-desc">Strategic planning and design consultancy for DHA Phase III Islamabad &mdash; a premium development integrating contemporary architecture with the natural landscape of the Margalla foothills.</p>
-          <span class="story-tag">Defence Housing</span>
-          <br>
-          <a href="casestudies/" class="story-read-more">Read More <span class="arrow">&rarr;</span></a>
-        </div>
-
-        <div class="story-card" id="story-4">
-          <div class="story-number">04</div>
-          <h3 class="story-title">Rahman Enclave &mdash; CDA NOC Project</h3>
-          <p class="story-desc">Full-cycle project management for Rahman Enclave &mdash; CDA No Objection Certificate compliance &mdash; navigating regulatory frameworks while delivering a high-quality residential enclave in the capital territory.</p>
-          <span class="story-tag">CDA Approved</span>
-          <br>
-          <a href="casestudies/" class="story-read-more">Read More <span class="arrow">&rarr;</span></a>
-        </div>
-
-        <div class="story-card" id="story-5">
-          <div class="story-number">05</div>
-          <h3 class="story-title">Citi Housing, Jhelum &amp; Kharian</h3>
-          <p class="story-desc">Master planning and infrastructure design across Hyde Park, Eiffel Tower, Emerald Hills, and Citi Housing Kharian &mdash; a guarded, gated estate of villas, townhouses, and modern apartments woven together by Citi Walk, Citi Park, and a considered mix of schools, mosques, and commercial centres.</p>
-          <span class="story-tag">Residential Estate</span>
-          <br>
-          <a href="casestudies/" class="story-read-more">Read More <span class="arrow">&rarr;</span></a>
         </div>
       </div>
     </div>
