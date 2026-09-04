@@ -1,33 +1,19 @@
 /* ═══════════════════════════════════════════════════
    THE URBAN SOLUTIONS — Scroll-Driven Animation Engine
-   Lenis + GSAP + ScrollTrigger + Canvas Frame Rendering
+   Lenis + GSAP + ScrollTrigger
    ═══════════════════════════════════════════════════ */
 
 (function () {
   "use strict";
 
   // ── Configuration ──
-  const FRAME_COUNT = 229;
   const isMobile = window.innerWidth <= 768;
-  const FRAME_SPEED = isMobile ? 2.5 : 2.0;
-  const IMAGE_SCALE = 0.85;
-  const FRAME_PATH = (i) => `frames/frame_${String(i).padStart(4, "0")}.webp`;
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   // ── DOM References ──
   const loader = document.getElementById("loader");
   const loaderBar = document.getElementById("loader-bar");
   const loaderPercent = document.getElementById("loader-percent");
-  const heroSection = document.getElementById("hero-standalone");
-  const canvas = document.getElementById("canvas");
-  const ctx = canvas.getContext("2d");
-  const scrollContainer = document.getElementById("scroll-container");
-  const darkOverlay = document.getElementById("dark-overlay");
-
-  // ── State ──
-  const frames = [];
-  let currentFrame = 0;
-  let bgColor = "#0d0d0d";
-  let allFramesLoaded = false;
 
   // ═══════════════════════════════════════════════════
   // 1. LENIS SMOOTH SCROLL
@@ -42,381 +28,157 @@
   gsap.ticker.lagSmoothing(0);
 
   // ═══════════════════════════════════════════════════
-  // 2. CANVAS SETUP
+  // 2. HERO IMAGE PRELOADER
   // ═══════════════════════════════════════════════════
-  function resizeCanvas() {
-    const dpr = window.devicePixelRatio || 1;
-    canvas.width = window.innerWidth * dpr;
-    canvas.height = window.innerHeight * dpr;
-    canvas.style.width = window.innerWidth + "px";
-    canvas.style.height = window.innerHeight + "px";
-    ctx.scale(dpr, dpr);
-    if (frames[currentFrame]) drawFrame(currentFrame);
-  }
-  window.addEventListener("resize", resizeCanvas);
-  resizeCanvas();
+  function preloadHeroImages() {
+    const imgs = Array.from(document.querySelectorAll(".hero-slide-img"));
+    if (!imgs.length) return Promise.resolve();
 
-  // ── Background Color Sampling ──
-  function sampleBgColor(img) {
-    const tempCanvas = document.createElement("canvas");
-    tempCanvas.width = img.naturalWidth;
-    tempCanvas.height = img.naturalHeight;
-    const tempCtx = tempCanvas.getContext("2d");
-    tempCtx.drawImage(img, 0, 0);
-
-    // Sample corner pixels
-    const samples = [
-      tempCtx.getImageData(2, 2, 1, 1).data,
-      tempCtx.getImageData(img.naturalWidth - 3, 2, 1, 1).data,
-      tempCtx.getImageData(2, img.naturalHeight - 3, 1, 1).data,
-      tempCtx.getImageData(img.naturalWidth - 3, img.naturalHeight - 3, 1, 1).data,
-    ];
-    const avg = samples.reduce(
-      (acc, s) => [acc[0] + s[0], acc[1] + s[1], acc[2] + s[2]],
-      [0, 0, 0]
-    );
-    return `rgb(${Math.round(avg[0] / 4)},${Math.round(avg[1] / 4)},${Math.round(avg[2] / 4)})`;
-  }
-
-  // ── Draw Frame (Padded Cover) ──
-  function drawFrame(index) {
-    const img = frames[index];
-    if (!img) return;
-    const cw = window.innerWidth;
-    const ch = window.innerHeight;
-    const iw = img.naturalWidth;
-    const ih = img.naturalHeight;
-    const scale = Math.max(cw / iw, ch / ih) * IMAGE_SCALE;
-    const dw = iw * scale;
-    const dh = ih * scale;
-    const dx = (cw - dw) / 2;
-    const dy = (ch - dh) / 2;
-
-    ctx.fillStyle = bgColor;
-    ctx.fillRect(0, 0, cw, ch);
-    ctx.drawImage(img, dx, dy, dw, dh);
-  }
-
-  // ═══════════════════════════════════════════════════
-  // 3. FRAME PRELOADER (Two-Phase)
-  // ═══════════════════════════════════════════════════
-  function loadFrame(index) {
-    return new Promise((resolve, reject) => {
-      const img = new Image();
-      img.onload = () => {
-        frames[index] = img;
-        // Sample bg every 20 frames
-        if (index % 20 === 0) {
-          try { bgColor = sampleBgColor(img); } catch (e) { /* cross-origin safety */ }
-        }
-        resolve(img);
-      };
-      img.onerror = () => reject(new Error(`Frame ${index} failed`));
-      img.src = FRAME_PATH(index);
-    });
-  }
-
-  async function preloadFrames() {
     let loaded = 0;
+    const total = imgs.length;
     const updateProgress = () => {
-      const pct = Math.round((loaded / FRAME_COUNT) * 100);
+      loaded++;
+      const pct = Math.round((loaded / total) * 100);
       loaderBar.style.width = pct + "%";
       loaderPercent.textContent = pct + "%";
     };
 
-    // Phase 1: Load first 10 frames quickly
-    const phase1 = [];
-    for (let i = 1; i <= Math.min(10, FRAME_COUNT); i++) {
-      phase1.push(
-        loadFrame(i).then(() => {
-          loaded++;
-          updateProgress();
-        })
-      );
-    }
-    await Promise.all(phase1);
-    drawFrame(1); // Show first frame immediately
-
-    // Phase 2: Load remaining frames in batches of 15
-    const batchSize = 15;
-    for (let start = 11; start <= FRAME_COUNT; start += batchSize) {
-      const batch = [];
-      for (let i = start; i < start + batchSize && i <= FRAME_COUNT; i++) {
-        batch.push(
-          loadFrame(i).then(() => {
-            loaded++;
-            updateProgress();
+    return Promise.all(
+      imgs.map(
+        (img) =>
+          new Promise((resolve) => {
+            if (img.complete) {
+              updateProgress();
+              resolve();
+              return;
+            }
+            img.addEventListener("load", () => { updateProgress(); resolve(); }, { once: true });
+            img.addEventListener("error", () => { updateProgress(); resolve(); }, { once: true });
           })
-        );
-      }
-      await Promise.all(batch);
-    }
-
-    allFramesLoaded = true;
-  }
-
-  // ═══════════════════════════════════════════════════
-  // 4. HERO ENTRANCE ANIMATION
-  // ═══════════════════════════════════════════════════
-  function animateHero() {
-    const tl = gsap.timeline();
-    tl.to(heroSection.querySelector(".section-label"), {
-      opacity: 1, y: 0, duration: 0.6, ease: "power3.out"
-    })
-    .to(heroSection.querySelectorAll(".word"), {
-      opacity: 1, y: 0, stagger: 0.1, duration: 0.8, ease: "power3.out"
-    }, "-=0.3")
-    .to(heroSection.querySelector(".hero-tagline"), {
-      opacity: 1, y: 0, duration: 0.7, ease: "power3.out"
-    }, "-=0.4");
-  }
-
-  // ═══════════════════════════════════════════════════
-  // 5. HERO → CANVAS CROSSFADE
-  // ═══════════════════════════════════════════════════
-  function initHeroTransition() {
-    // Canvas is always visible underneath the hero. As the hero scrolls,
-    // its opacity dissolves to reveal the canvas frame below — and since
-    // frame 1 matches the hero's background image, this reads as a seamless
-    // crossfade rather than a hard wipe.
-    ScrollTrigger.create({
-      trigger: heroSection,
-      start: "top top",
-      end: "bottom top",
-      scrub: true,
-      onUpdate: (self) => {
-        const p = self.progress;
-        heroSection.style.opacity = Math.max(0, 1 - Math.pow(p, 0.85));
-      },
-    });
-  }
-
-  // ═══════════════════════════════════════════════════
-  // 6. FRAME-TO-SCROLL BINDING
-  // ═══════════════════════════════════════════════════
-  function initFrameScroll() {
-    ScrollTrigger.create({
-      trigger: scrollContainer,
-      start: "top top",
-      end: "bottom bottom",
-      scrub: true,
-      onUpdate: (self) => {
-        const accelerated = Math.min(self.progress * FRAME_SPEED, 1);
-        const index = Math.min(
-          Math.floor(accelerated * (FRAME_COUNT - 1)) + 1,
-          FRAME_COUNT
-        );
-        if (index !== currentFrame) {
-          currentFrame = index;
-          requestAnimationFrame(() => drawFrame(currentFrame));
-        }
-      },
-    });
-  }
-
-  // ═══════════════════════════════════════════════════
-  // 7. SECTION ANIMATION SYSTEM
-  // ═══════════════════════════════════════════════════
-  function setupSectionAnimation(section) {
-    const type = section.dataset.animation;
-    const persist = section.dataset.persist === "true";
-    const enter = parseFloat(section.dataset.enter) / 100;
-    const leave = parseFloat(section.dataset.leave) / 100;
-    const children = section.querySelectorAll(
-      ".section-label, .section-heading, .section-body, .section-note, .cta-button, .stat"
+      )
     );
-
-    const tl = gsap.timeline({ paused: true });
-
-    switch (type) {
-      case "fade-up":
-        tl.from(children, { y: 50, opacity: 0, stagger: 0.12, duration: 0.9, ease: "power3.out" });
-        break;
-      case "slide-left":
-        tl.from(children, { x: -80, opacity: 0, stagger: 0.14, duration: 0.9, ease: "power3.out" });
-        break;
-      case "slide-right":
-        tl.from(children, { x: 80, opacity: 0, stagger: 0.14, duration: 0.9, ease: "power3.out" });
-        break;
-      case "scale-up":
-        tl.from(children, { scale: 0.85, opacity: 0, stagger: 0.12, duration: 1.0, ease: "power2.out" });
-        break;
-      case "rotate-in":
-        tl.from(children, { y: 40, rotation: 3, opacity: 0, stagger: 0.1, duration: 0.9, ease: "power3.out" });
-        break;
-      case "stagger-up":
-        tl.from(children, { y: 60, opacity: 0, stagger: 0.15, duration: 0.8, ease: "power3.out" });
-        break;
-      case "clip-reveal":
-        tl.from(children, { clipPath: "inset(100% 0 0 0)", opacity: 0, stagger: 0.15, duration: 1.2, ease: "power4.inOut" });
-        break;
-    }
-
-    let isPlayed = false;
-
-    ScrollTrigger.create({
-      trigger: scrollContainer,
-      start: "top top",
-      end: "bottom bottom",
-      scrub: false,
-      onUpdate: (self) => {
-        const p = self.progress;
-        const fadeMargin = 0.02;
-
-        if (p >= enter && p <= leave) {
-          section.classList.add("is-visible");
-          if (!isPlayed) {
-            tl.play();
-            isPlayed = true;
-          }
-        } else if (persist && p > leave) {
-          // Keep visible
-          section.classList.add("is-visible");
-        } else {
-          section.classList.remove("is-visible");
-          if (isPlayed && !persist) {
-            tl.reverse();
-            isPlayed = false;
-          }
-        }
-      },
-    });
-  }
-
-  function initSections() {
-    const sections = document.querySelectorAll(".scroll-section");
-    if (isMobile) {
-      // Hand-tuned mobile timings: even spacing across the scroll, ~3pt gap
-      // between sections so headings never overlap.
-      const mobileTimings = [
-        { enter: 5,  leave: 25 },   // Section 1: From Plan to Execution
-        { enter: 28, leave: 48 },   // Section 2: Not Just Your Designer
-        { enter: 52, leave: 72 },   // Section 3: Stats
-        { enter: 76, leave: 100 },  // Section 4: CTA (persistent)
-      ];
-      sections.forEach((section, i) => {
-        const t = mobileTimings[i];
-        if (t) {
-          section.dataset.enter = String(t.enter);
-          section.dataset.leave = String(t.leave);
-        }
-      });
-    }
-    sections.forEach((section) => setupSectionAnimation(section));
   }
 
   // ═══════════════════════════════════════════════════
-  // 8. COUNTER ANIMATIONS
+  // 3. HERO PROJECT SLIDER (Scroll-Pinned)
+  // ═══════════════════════════════════════════════════
+  function initHeroSlider() {
+    const heroSlider = document.getElementById("hero-slider");
+    const mediaEls = Array.from(document.querySelectorAll(".hero-slide-media"));
+    const contentEls = Array.from(document.querySelectorAll(".hero-slide-content"));
+    const dots = Array.from(document.querySelectorAll(".hero-dot"));
+    const prevBtn = document.getElementById("hero-prev");
+    const nextBtn = document.getElementById("hero-next");
+    if (!heroSlider || !mediaEls.length) return;
+
+    const slideCount = mediaEls.length;
+    let currentIndex = 0;
+
+    // Text swaps discretely (class toggle, CSS handles the quick fade) so
+    // two headings are never visible at once. Background images crossfade
+    // continuously in the full experience — see onUpdate below.
+    function setActiveUI(index) {
+      currentIndex = index;
+      dots.forEach((dot, i) => {
+        dot.classList.toggle("is-active", i === index);
+        dot.setAttribute("aria-selected", i === index ? "true" : "false");
+      });
+      contentEls.forEach((el, i) => el.classList.toggle("is-active", i === index));
+    }
+
+    // ── Reduced motion: no pin, no scrub — instant/faded slide swap ──
+    if (prefersReducedMotion) {
+      document.documentElement.classList.add("reduced-motion");
+
+      function goTo(index) {
+        const clamped = Math.max(0, Math.min(index, slideCount - 1));
+        mediaEls.forEach((el, i) => el.classList.toggle("is-active", i === clamped));
+        setActiveUI(clamped);
+      }
+      dots.forEach((dot, i) => dot.addEventListener("click", () => goTo(i)));
+      prevBtn.addEventListener("click", () => goTo(currentIndex - 1));
+      nextBtn.addEventListener("click", () => goTo(currentIndex + 1));
+      return;
+    }
+
+    // ── Full experience: pin the hero and scrub between slides ──
+    const vhPerSlide = isMobile ? 0.75 : 1;
+
+    const st = ScrollTrigger.create({
+      trigger: heroSlider,
+      start: "top top",
+      end: () => "+=" + window.innerHeight * (slideCount - 1) * vhPerSlide,
+      pin: true,
+      scrub: 1,
+      anticipatePin: 1,
+      invalidateOnRefresh: true,
+      onUpdate: (self) => {
+        const raw = self.progress * (slideCount - 1);
+        const lower = Math.floor(raw);
+        const upper = Math.min(lower + 1, slideCount - 1);
+        const frac = raw - lower;
+
+        mediaEls.forEach((el, i) => {
+          let opacity = 0;
+          if (i === lower) opacity = 1 - frac;
+          else if (i === upper && upper !== lower) opacity = frac;
+          el.style.opacity = opacity;
+        });
+
+        const activeIndex = Math.round(raw);
+        if (activeIndex !== currentIndex) setActiveUI(activeIndex);
+      },
+    });
+
+    function goTo(index) {
+      const clamped = Math.max(0, Math.min(index, slideCount - 1));
+      const target = st.start + (clamped / (slideCount - 1)) * (st.end - st.start);
+      lenis.scrollTo(target, { duration: 1.1 });
+    }
+
+    dots.forEach((dot, i) => dot.addEventListener("click", () => goTo(i)));
+    prevBtn.addEventListener("click", () => goTo(currentIndex - 1));
+    nextBtn.addEventListener("click", () => goTo(currentIndex + 1));
+  }
+
+  // ═══════════════════════════════════════════════════
+  // 4. COUNTER ANIMATIONS
   // ═══════════════════════════════════════════════════
   function initCounters() {
-    document.querySelectorAll(".stat-number").forEach((el) => {
-      const target = parseFloat(el.dataset.value);
-      const decimals = parseInt(el.dataset.decimals || "0");
-      const obj = { val: 0 };
+    const counters = document.querySelectorAll(".stat-number");
+    if (!counters.length) return;
 
-      ScrollTrigger.create({
-        trigger: scrollContainer,
-        start: "top top",
-        end: "bottom bottom",
-        onUpdate: (self) => {
-          const statsSection = el.closest(".scroll-section");
-          if (statsSection && statsSection.classList.contains("is-visible")) {
-            gsap.to(obj, {
-              val: target,
-              duration: 2,
-              ease: "power1.out",
-              onUpdate: () => {
-                el.textContent = decimals === 0
-                  ? Math.round(obj.val)
-                  : obj.val.toFixed(decimals);
-              },
-            });
-          }
-        },
-      });
-    });
-  }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target;
+          const target = parseFloat(el.dataset.value);
+          const decimals = parseInt(el.dataset.decimals || "0");
+          const obj = { val: 0 };
 
-  // ═══════════════════════════════════════════════════
-  // 9. HORIZONTAL MARQUEE
-  // ═══════════════════════════════════════════════════
-  function initMarquees() {
-    document.querySelectorAll(".marquee-wrap").forEach((el) => {
-      const speed = parseFloat(el.dataset.scrollSpeed) || -25;
-      let enter = parseFloat(el.dataset.enter) / 100;
-      let leave = parseFloat(el.dataset.leave) / 100;
-      const fadeRange = 0.04;
+          gsap.to(obj, {
+            val: target,
+            duration: 2,
+            ease: "power1.out",
+            onUpdate: () => {
+              el.textContent = decimals === 0
+                ? Math.round(obj.val)
+                : obj.val.toFixed(decimals);
+            },
+          });
 
-      // Mobile marquee timings — pair Marquee 1 with Section 2 and
-      // Marquee 2 with the CTA, matching the desktop pairing intent.
-      if (isMobile) {
-        if (el.id === "marquee-1") { enter = 0.30; leave = 0.50; }
-        else if (el.id === "marquee-2") { enter = 0.74; leave = 0.96; }
-      }
-
-      gsap.to(el.querySelector(".marquee-text"), {
-        xPercent: speed,
-        ease: "none",
-        scrollTrigger: {
-          trigger: scrollContainer,
-          start: "top top",
-          end: "bottom bottom",
-          scrub: true,
-        },
-      });
-
-      // Fade marquee in/out
-      ScrollTrigger.create({
-        trigger: scrollContainer,
-        start: "top top",
-        end: "bottom bottom",
-        scrub: true,
-        onUpdate: (self) => {
-          const p = self.progress;
-          let opacity = 0;
-          if (p >= enter - fadeRange && p <= enter) {
-            opacity = (p - (enter - fadeRange)) / fadeRange;
-          } else if (p > enter && p < leave) {
-            opacity = 1;
-          } else if (p >= leave && p <= leave + fadeRange) {
-            opacity = 1 - (p - leave) / fadeRange;
-          }
-          el.style.opacity = opacity;
-        },
-      });
-    });
-  }
-
-  // ═══════════════════════════════════════════════════
-  // 10. DARK OVERLAY
-  // ═══════════════════════════════════════════════════
-  function initDarkOverlay() {
-    const enter = isMobile ? 0.50 : 0.42;
-    const leave = isMobile ? 0.74 : 0.62;
-    const fadeRange = 0.04;
-
-    ScrollTrigger.create({
-      trigger: scrollContainer,
-      start: "top top",
-      end: "bottom bottom",
-      scrub: true,
-      onUpdate: (self) => {
-        const p = self.progress;
-        let opacity = 0;
-        if (p >= enter - fadeRange && p <= enter) {
-          opacity = ((p - (enter - fadeRange)) / fadeRange) * 0.9;
-        } else if (p > enter && p < leave) {
-          opacity = 0.9;
-        } else if (p >= leave && p <= leave + fadeRange) {
-          opacity = 0.9 * (1 - (p - leave) / fadeRange);
-        }
-        darkOverlay.style.opacity = opacity;
+          observer.unobserve(el);
+        });
       },
-    });
+      { threshold: 0.4 }
+    );
+
+    counters.forEach((el) => observer.observe(el));
   }
 
   // ═══════════════════════════════════════════════════
-  // 11. BELOW-SCROLL REVEAL ANIMATIONS
+  // 5. BELOW-HERO REVEAL ANIMATIONS
   // ═══════════════════════════════════════════════════
   function initBelowScrollAnimations() {
     // Reveal headings and subheadings
@@ -428,7 +190,7 @@
     });
 
     // Cards get staggered reveal
-    const cards = document.querySelectorAll(".team-card, .story-card");
+    const cards = document.querySelectorAll(".stat, .team-card, .story-card");
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -457,7 +219,7 @@
   }
 
   // ═══════════════════════════════════════════════════
-  // 12. MOBILE MENU
+  // 6. MOBILE MENU
   // ═══════════════════════════════════════════════════
   function initMobileMenu() {
     const btn = document.getElementById("mobile-menu-btn");
@@ -522,7 +284,7 @@
     // Disable scroll during load
     lenis.stop();
 
-    await preloadFrames();
+    await preloadHeroImages();
 
     // Hide loader
     loader.classList.add("hidden");
@@ -530,16 +292,9 @@
     // Re-enable scroll
     lenis.start();
 
-    // Animate hero entrance
-    animateHero();
-
     // Initialize all scroll-driven systems
-    initHeroTransition();
-    initFrameScroll();
-    initSections();
+    initHeroSlider();
     initCounters();
-    initMarquees();
-    initDarkOverlay();
     initBelowScrollAnimations();
     initMobileMenu();
   }

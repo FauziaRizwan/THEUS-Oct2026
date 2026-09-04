@@ -28,7 +28,7 @@
   <header class="site-header" id="site-header">
     <nav>
       <a href="/" class="logo">
-        <img src="frames/logo_v2.png" alt="The Urban Solutions" class="nav-logo-img">
+        <img src="images/logo_v2.png" alt="The Urban Solutions" class="nav-logo-img">
       </a>
       <ul class="nav-links">
         <li><a href="#about-section">About</a></li>
@@ -67,92 +67,84 @@
     </div>
   </div>
 
-  <!-- ============ HERO STANDALONE ============ -->
-  <section class="hero-standalone" id="hero-standalone">
-    <!-- Hero background layers with Parallax wrapper -->
-    <div class="hero-bg-parallax" id="hero-bg-parallax">
-      <div class="header-bg">
-        <img src="frames/headerimage1.webp" alt="" class="header-bg-img">
-      </div>
-      <div class="header-gradient-overlay"></div>
-      <div class="header-glass-blobs">
-        <div class="glass-blob blob-green"></div>
-        <div class="glass-blob blob-maroon"></div>
-        <div class="glass-blob blob-green-2"></div>
-      </div>
-      <div class="header-dark-overlay"></div>
+  <!-- ============ HERO PROJECT SLIDER ============ -->
+  <!-- Background images crossfade continuously with scroll; text content
+       swaps per-slide (no double-exposed headings during the blend). -->
+  <section class="hero-slider" id="hero-slider" aria-roledescription="carousel" aria-label="Featured Projects">
+    <div class="hero-slide-media is-active" data-index="0">
+      <img src="images/projects/faisal-town-islamabad.webp" alt="Faisal Town, Islamabad" class="hero-slide-img" style="object-position: center center;" loading="eager">
     </div>
-    
-    <div class="hero-logo-container">
-      <img src="frames/logo_v2.png" alt="The Urban Solutions Logo" class="hero-logo-img">
+    <div class="hero-slide-media" data-index="1">
+      <img src="images/projects/aviation-city-kamra.webp" alt="Aviation City, Kamra" class="hero-slide-img" style="object-position: center center;" loading="lazy">
     </div>
-    
-    <div class="hero-inner">
-      <span class="section-label">001 / Introduction</span>
-      <h1 class="hero-heading">
-        <span class="word">From</span>
-        <span class="word">Plan</span>
-        <span class="word accent">to</span>
-        <span class="word">Execution</span>
-      </h1>
-      <p class="hero-tagline">The Urban Solutions ensures your success.</p>
+    <div class="hero-slide-media" data-index="2">
+      <img src="images/projects/dha-quetta.webp" alt="DHA Quetta" class="hero-slide-img" style="object-position: center center;" loading="lazy">
     </div>
-    <div class="scroll-indicator">
-      <span>Scroll to explore</span>
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M12 5v14M5 12l7 7 7-7"/>
-      </svg>
+    <div class="hero-slide-media" data-index="3">
+      <img src="images/projects/citi-housing-kharian.webp" alt="Citi Housing, Kharian" class="hero-slide-img" style="object-position: center center;" loading="lazy">
+    </div>
+    <div class="hero-slide-media" data-index="4">
+      <img src="images/projects/rahman-enclave-cda-noc.webp" alt="Rahman Enclave, CDA NOC" class="hero-slide-img" style="object-position: center center;" loading="lazy">
+    </div>
+
+    <div class="hero-slide-gradient"></div>
+
+    <div class="hero-slide-content is-active" data-index="0">
+      <span class="hero-slide-eyebrow">01 &mdash; Faisal Town, Islamabad</span>
+      <h1 class="hero-slide-title">Faisal Town<br><span class="accent">Islamabad</span></h1>
+      <a href="casestudies/" class="cta-button hero-slide-cta">View Project &rarr;</a>
+    </div>
+    <div class="hero-slide-content" data-index="1">
+      <span class="hero-slide-eyebrow">02 &mdash; Aviation City, Kamra</span>
+      <h1 class="hero-slide-title">Aviation City<br><span class="accent">Kamra</span></h1>
+      <a href="casestudies/" class="cta-button hero-slide-cta">View Project &rarr;</a>
+    </div>
+    <div class="hero-slide-content" data-index="2">
+      <span class="hero-slide-eyebrow">03 &mdash; Defence Housing Authority, Quetta</span>
+      <h1 class="hero-slide-title">DHA<br><span class="accent">Quetta</span></h1>
+      <a href="casestudies/" class="cta-button hero-slide-cta">View Project &rarr;</a>
+    </div>
+    <div class="hero-slide-content" data-index="3">
+      <span class="hero-slide-eyebrow">04 &mdash; Citi Housing, Jhelum &amp; Kharian</span>
+      <h1 class="hero-slide-title">Citi Housing<br><span class="accent">Kharian</span></h1>
+      <a href="casestudies/" class="cta-button hero-slide-cta">View Project &rarr;</a>
+    </div>
+    <div class="hero-slide-content" data-index="4">
+      <span class="hero-slide-eyebrow">05 &mdash; Rahman Enclave, CDA NOC</span>
+      <h1 class="hero-slide-title">Rahman Enclave<br><span class="accent">CDA NOC</span></h1>
+      <a href="casestudies/" class="cta-button hero-slide-cta">View Project &rarr;</a>
+    </div>
+
+    <button class="hero-nav-arrow hero-nav-prev" id="hero-prev" aria-label="Previous project" type="button">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <button class="hero-nav-arrow hero-nav-next" id="hero-next" aria-label="Next project" type="button">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+
+    <div class="hero-slider-dots" id="hero-dots" role="tablist" aria-label="Project slides">
+      <button class="hero-dot is-active" data-index="0" role="tab" aria-selected="true" aria-label="Go to slide 1: Faisal Town, Islamabad" type="button"></button>
+      <button class="hero-dot" data-index="1" role="tab" aria-selected="false" aria-label="Go to slide 2: Aviation City, Kamra" type="button"></button>
+      <button class="hero-dot" data-index="2" role="tab" aria-selected="false" aria-label="Go to slide 3: DHA Quetta" type="button"></button>
+      <button class="hero-dot" data-index="3" role="tab" aria-selected="false" aria-label="Go to slide 4: Citi Housing, Kharian" type="button"></button>
+      <button class="hero-dot" data-index="4" role="tab" aria-selected="false" aria-label="Go to slide 5: Rahman Enclave, CDA NOC" type="button"></button>
     </div>
   </section>
 
-  <!-- ============ CANVAS ============ -->
-  <div class="canvas-wrap" id="canvas-wrap">
-    <canvas id="canvas"></canvas>
-  </div>
+  <!-- ============ BELOW-HERO SECTIONS ============ -->
 
-  <!-- ============ DARK OVERLAY ============ -->
-  <div id="dark-overlay"></div>
+  <!-- STATS -->
+  <section class="page-section stats-section" id="about-section">
+    <div class="container">
+      <span class="section-label-static">Our Track Record</span>
+      <h2 class="page-heading">Projects Delivered,<br>Impact Measured</h2>
+      <p class="page-subheading">More than a decade of disciplined planning and execution &mdash; translating ambitious urban visions into measurable results across Pakistan's fastest-growing developments.</p>
 
-  <!-- ============ MARQUEE ============ -->
-  <div class="marquee-wrap" id="marquee-1" data-scroll-speed="-30" data-enter="25" data-leave="45">
-    <div class="marquee-text">URBAN SOLUTIONS &mdash; DESIGN &mdash; EXECUTE &mdash; DELIVER &mdash; URBAN SOLUTIONS &mdash; DESIGN &mdash; EXECUTE &mdash; DELIVER &mdash;&nbsp;</div>
-  </div>
-
-  <div class="marquee-wrap" id="marquee-2" data-scroll-speed="20" data-enter="60" data-leave="80">
-    <div class="marquee-text">ARCHITECTURE &mdash; PLANNING &mdash; CONSTRUCTION &mdash; EXCELLENCE &mdash; ARCHITECTURE &mdash; PLANNING &mdash; CONSTRUCTION &mdash; EXCELLENCE &mdash;&nbsp;</div>
-  </div>
-
-  <!-- ============ SCROLL CONTAINER ============ -->
-  <div id="scroll-container">
-
-    <!-- Section 1: From Plan to Execution -->
-    <section class="scroll-section section-content align-left"
-             data-enter="3" data-leave="24" data-animation="fade-up" id="about-section">
-      <div class="section-inner">
-        <span class="section-label">001 / Vision</span>
-        <h2 class="section-heading">From Plan<br>to Execution</h2>
-        <p class="section-body">The Urban Solutions ensures your success. We transform ambitious blueprints into landmark realities &mdash; orchestrating every phase with precision, creativity, and uncompromising standards.</p>
-      </div>
-    </section>
-
-    <!-- Section 2: Not Just Your Designer -->
-    <section class="scroll-section section-content align-right"
-             data-enter="22" data-leave="42" data-animation="slide-right">
-      <div class="section-inner">
-        <span class="section-label">002 / Approach</span>
-        <h2 class="section-heading">Not Just<br>Your Designer</h2>
-        <p class="section-body">We ensure execution at each stage. From initial concept through final handover, our team embeds itself in your project &mdash; anticipating challenges, managing resources, and delivering results that exceed expectations.</p>
-      </div>
-    </section>
-
-    <!-- Section 3: Stats Overlay -->
-    <section class="scroll-section section-stats"
-             data-enter="44" data-leave="60" data-animation="stagger-up">
       <div class="stats-grid">
         <div class="stat">
           <span class="stat-number" data-value="150" data-decimals="0">0</span>
           <span class="stat-suffix">+</span>
-          <span class="stat-label">Projects Delivered</span>
+          <span class="stat-label">Planning Projects</span>
         </div>
         <div class="stat">
           <span class="stat-number" data-value="12" data-decimals="0">0</span>
@@ -160,32 +152,18 @@
           <span class="stat-label">Industry Experience</span>
         </div>
         <div class="stat">
-          <span class="stat-number" data-value="98" data-decimals="0">0</span>
-          <span class="stat-suffix">%</span>
-          <span class="stat-label">Client Satisfaction</span>
+          <span class="stat-number" data-value="200" data-decimals="0">0</span>
+          <span class="stat-suffix">Million</span>
+          <span class="stat-label">Kanal Planned</span>
         </div>
         <div class="stat">
           <span class="stat-number" data-value="40" data-decimals="0">0</span>
           <span class="stat-suffix">M+</span>
-          <span class="stat-label">Budget Managed</span>
+          <span class="stat-label">Housing Units Managed</span>
         </div>
       </div>
-    </section>
-
-    <!-- Section 4: CTA (persist &mdash; stays visible at end) -->
-    <section class="scroll-section section-content align-left"
-             data-enter="62" data-leave="100" data-animation="clip-reveal" data-persist="true">
-      <div class="section-inner">
-        <span class="section-label">003 / Next Step</span>
-        <h2 class="section-heading">Let's Reach the Heights<br>Your Project Deserves</h2>
-        <p class="section-body">Partner with us! Ready when you are!</p>
-        <a href="#contact-section" class="cta-button">Start Your Project &rarr;</a>
-      </div>
-    </section>
-
-  </div><!-- /scroll-container -->
-
-  <!-- ============ BELOW-SCROLL SECTIONS ============ -->
+    </div>
+  </section>
 
   <!-- OUR TEAM -->
   <section class="page-section team-section" id="team-section">
@@ -203,6 +181,7 @@
           <h3 class="team-name">Syed Rizwan Munir</h3>
           <span class="team-role">Chief Executive Officer</span>
           <p class="team-bio">With a relentless drive for excellence, Syed Rizwan Munir founded The Urban Solutions to bridge the gap between architectural vision and flawless execution. His strategic leadership has steered over 150 projects from concept to completion &mdash; each one a testament to precision planning, innovative design, and an unwavering commitment to client success. Under his direction, the firm has become a trusted name in urban development across the region.</p>
+          <a href="team/syed-rizwan-munir/" class="story-read-more">View Profile <span class="arrow">&rarr;</span></a>
         </div>
 
         <!-- MD -->
@@ -213,6 +192,7 @@
           <h3 class="team-name">Fauzia Rizwan</h3>
           <span class="team-role">Managing Director</span>
           <p class="team-bio">Fauzia Rizwan brings operational mastery and a meticulous eye for detail to every project. As Managing Director, she oversees end-to-end project delivery &mdash; ensuring timelines, budgets, and quality benchmarks are not just met, but exceeded. Her ability to harmonize creative ambition with practical execution has been instrumental in building lasting relationships with clients and partners alike.</p>
+          <a href="team/fauzia-rizwan/" class="story-read-more">View Profile <span class="arrow">&rarr;</span></a>
         </div>
       </div>
     </div>
@@ -228,8 +208,8 @@
       <div class="stories-grid">
         <div class="story-card" id="story-1">
           <div class="story-number">01</div>
-          <h3 class="story-title">DHA Quetta</h3>
-          <p class="story-desc">Comprehensive urban planning and development for Defence Housing Authority Quetta &mdash; delivering world-class residential infrastructure with meticulous attention to master planning, road networks, and community amenities.</p>
+          <h3 class="story-title">Defence Housing Authority, Quetta</h3>
+          <p class="story-desc">Zoning plan, master planning, and detailed infrastructure design for a 12,500-acre development bordering Quetta city &mdash; climate-resilient, water-conservative planning that recycles city greywater for irrigation while unlocking CPEC's economic potential.</p>
           <span class="story-tag">Urban Planning</span>
           <br>
           <a href="casestudies/" class="story-read-more">Read More <span class="arrow">&rarr;</span></a>
@@ -261,6 +241,15 @@
           <br>
           <a href="casestudies/" class="story-read-more">Read More <span class="arrow">&rarr;</span></a>
         </div>
+
+        <div class="story-card" id="story-5">
+          <div class="story-number">05</div>
+          <h3 class="story-title">Citi Housing, Jhelum &amp; Kharian</h3>
+          <p class="story-desc">Master planning and infrastructure design across Hyde Park, Eiffel Tower, Emerald Hills, and Citi Housing Kharian &mdash; a guarded, gated estate of villas, townhouses, and modern apartments woven together by Citi Walk, Citi Park, and a considered mix of schools, mosques, and commercial centres.</p>
+          <span class="story-tag">Residential Estate</span>
+          <br>
+          <a href="casestudies/" class="story-read-more">Read More <span class="arrow">&rarr;</span></a>
+        </div>
       </div>
     </div>
   </section>
@@ -271,7 +260,7 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <a href="/" class="footer-logo" style="display:block;">
-            <img src="frames/logo_v2.png" alt="The Urban Solutions" class="footer-logo-img">
+            <img src="images/logo_v2.png" alt="The Urban Solutions" class="footer-logo-img">
           </a>
           <p class="footer-tagline">From Plan to Execution.<br>Your success is our blueprint.</p>
         </div>
