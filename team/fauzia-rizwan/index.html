@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fauzia Rizwan &mdash; Managing Director, The Urban Solutions</title>
-  <meta name="description" content="Fauzia Rizwan, Managing Director of The Urban Solutions &mdash; the operational discipline behind end-to-end delivery on 150+ master-planned developments.">
+  <title>Fauzia Rizwan &mdash; Urban Planner &amp; Policy Expert, The Urban Solutions</title>
+  <meta name="description" content="Fauzia Rizwan, Urban Planner &amp; Policy Expert and Director of The Urban Solutions Pvt. Ltd. &mdash; two decades of master planning, habitat planning, and land-use policy across Pakistan.">
 
   <!-- Fonts: League Spartan (Display) + Roboto (Body) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,30 +13,18 @@
 
   <link rel="stylesheet" href="../../css/style.css">
 
-  <style>
-    /* Founder Profile Specific Styles */
-    .fp-hero {
-      position: relative;
-      z-index: 5;
-      min-height: 75vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      background: var(--bg-dark);
-      padding: calc(var(--header-h) + 6vh) 5vw 6vh;
-      overflow: hidden;
-    }
-    .fp-hero::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 15% 25%, rgba(247, 168, 0, 0.14) 0%, transparent 50%);
-      pointer-events: none;
-      z-index: 0;
-    }
-    .fp-hero-inner { position: relative; z-index: 2; max-width: 900px; }
+  <!-- Runs before paint: only reveal-gate content once we know the animation
+       engine is actually going to run, so a JS/CDN failure never leaves
+       page content stuck invisible (see .dp-reveal rules below). -->
+  <script>document.documentElement.classList.add('dp-js');</script>
 
-    .fp-back-link {
+  <style>
+    /* ═══════════════════════════════════════════════════
+       DIRECTOR PROFILE — Fauzia Rizwan
+       Editorial / document-like: sleek, print-share-worthy
+       ═══════════════════════════════════════════════════ */
+
+    .dp-back-link {
       display: flex;
       width: fit-content;
       align-items: center;
@@ -45,12 +33,69 @@
       font-size: 0.85rem;
       font-weight: 500;
       color: var(--text-muted);
-      margin-bottom: 2.5rem;
+      margin-bottom: 2.2rem;
       transition: color 0.3s ease;
     }
-    .fp-back-link:hover { color: var(--accent); }
+    .dp-back-link:hover { color: var(--accent); }
 
-    .fp-eyebrow {
+    /* ── Hero ── */
+    .dp-hero {
+      position: relative;
+      z-index: 5;
+      background: var(--bg-dark);
+      padding: calc(var(--header-h) + 6vh) 5vw 7vh;
+      overflow: hidden;
+    }
+    .dp-hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 85% 15%, rgba(140, 198, 63, 0.12) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .dp-hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 4.5rem;
+      align-items: center;
+    }
+    .dp-photo-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      border-radius: 16px;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--accent-dim), var(--accent));
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
+    }
+    .dp-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      will-change: transform;
+    }
+    .dp-photo-initials {
+      display: none;
+      width: 100%;
+      height: 100%;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 4rem;
+      color: var(--bg-dark);
+      letter-spacing: 0.02em;
+    }
+    .dp-photo-fallback .dp-photo { display: none; }
+    .dp-photo-fallback .dp-photo-initials { display: flex; }
+
+    .dp-eyebrow {
       display: inline-block;
       font-family: var(--font-body);
       font-size: 0.75rem;
@@ -58,68 +103,56 @@
       text-transform: uppercase;
       letter-spacing: 0.2em;
       color: var(--accent);
-      margin-bottom: 1.8rem;
+      margin-bottom: 1.4rem;
     }
-
-    .fp-avatar {
-      width: 130px;
-      height: 130px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent-dim), var(--accent));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 2rem;
-      box-shadow: 0 20px 50px rgba(247, 168, 0, 0.15);
-    }
-    .fp-avatar-initials {
+    .dp-name {
       font-family: var(--font-display);
       font-weight: 800;
-      font-size: 2.75rem;
-      color: var(--bg-dark);
-      letter-spacing: 0.02em;
-    }
-
-    .fp-name {
-      font-family: var(--font-display);
-      font-weight: 800;
-      font-size: clamp(2.6rem, 6vw, 4.8rem);
+      font-size: clamp(2.4rem, 5vw, 4rem);
       line-height: 1;
       letter-spacing: -0.03em;
       color: #fff;
-      margin-bottom: 0.9rem;
+      margin-bottom: 0.7rem;
     }
-    .fp-role {
+    .dp-role {
       font-family: var(--font-body);
-      font-size: clamp(1rem, 1.3vw, 1.25rem);
+      font-size: clamp(1rem, 1.3vw, 1.2rem);
       font-weight: 500;
-      color: var(--accent);
-      margin-bottom: 1.6rem;
+      color: var(--brand-green);
+      margin-bottom: 1rem;
     }
-    .fp-tagline {
+    .dp-subtitle {
       font-family: var(--font-body);
-      font-size: clamp(1.05rem, 1.3vw, 1.3rem);
+      font-size: 0.95rem;
       line-height: 1.6;
       color: var(--text-muted);
       max-width: 620px;
-    }
-
-    /* Bio narrative */
-    .fp-bio-section { padding: 10vh 5vw; background: var(--bg-accent); }
-    .fp-bio-inner { max-width: 760px; margin: 0 auto; }
-    .fp-bio-inner p {
-      font-family: var(--font-body);
-      font-size: clamp(1rem, 1.1vw, 1.15rem);
-      line-height: 1.85;
-      color: var(--text-on-dark);
       margin-bottom: 1.6rem;
     }
-    .fp-bio-inner p:last-child { margin-bottom: 0; }
+    .dp-contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem 1.6rem;
+    }
+    .dp-contact-row a {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-on-dark);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.3s ease;
+    }
+    .dp-contact-row a:hover { color: var(--accent); }
+    .dp-contact-row svg { flex-shrink: 0; color: var(--accent); }
 
-    /* Pillars */
-    .fp-pillars-section { padding: 10vh 5vw; background: var(--bg-dark); }
-    .fp-pillars-inner { max-width: 1100px; margin: 0 auto; }
-    .fp-pillars-label {
+    /* ── Generic section scaffolding ── */
+    .dp-section { padding: 9vh 5vw; }
+    .dp-section-alt { background: var(--bg-accent); }
+    .dp-section-inner { max-width: 1000px; margin: 0 auto; }
+    .dp-section-inner-wide { max-width: 1100px; margin: 0 auto; }
+    .dp-section-label {
       display: block;
       font-family: var(--font-body);
       font-size: 0.7rem;
@@ -127,78 +160,397 @@
       text-transform: uppercase;
       letter-spacing: 0.2em;
       color: var(--accent);
-      margin-bottom: 2.5rem;
+      margin-bottom: 0.8rem;
     }
-    .fp-pillars-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2.5rem;
-    }
-    .fp-pillar { border-left: 2px solid var(--accent); padding-left: 1.4rem; }
-    .fp-pillar h3 {
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 1.3rem;
-      color: #fff;
-      margin-bottom: 0.7rem;
-    }
-    .fp-pillar p {
-      font-family: var(--font-body);
-      font-size: 0.95rem;
-      line-height: 1.65;
-      color: var(--text-muted);
-    }
-
-    /* Stats strip */
-    .fp-stats-section { padding: 8vh 5vw; background: var(--bg-accent); }
-    .fp-stats-inner { max-width: 1100px; margin: 0 auto; }
-
-    /* CTA */
-    .fp-cta-section { padding: 10vh 5vw; background: var(--bg-dark); text-align: center; }
-    .fp-cta-inner { max-width: 700px; margin: 0 auto; }
-    .fp-cta-inner h2 {
+    .dp-section-title {
       font-family: var(--font-display);
       font-weight: 800;
-      font-size: clamp(2rem, 4vw, 3rem);
-      color: #fff;
-      margin-bottom: 1rem;
+      font-size: clamp(1.8rem, 3.4vw, 2.6rem);
       letter-spacing: -0.02em;
-    }
-    .fp-cta-inner p {
-      font-family: var(--font-body);
-      color: var(--text-muted);
+      color: #fff;
       margin-bottom: 2.2rem;
-      font-size: 1.05rem;
     }
-    .fp-cta-links {
+
+    /* ── Bio ── */
+    .dp-bio-inner p {
+      font-family: var(--font-body);
+      font-size: clamp(1rem, 1.1vw, 1.1rem);
+      line-height: 1.85;
+      color: var(--text-on-dark);
+      margin-bottom: 1.5rem;
+    }
+    .dp-bio-inner p:last-child { margin-bottom: 0; }
+
+    /* ── Expertise grid ── */
+    .dp-expertise-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.9rem 2.5rem;
+    }
+    .dp-expertise-item {
       display: flex;
-      gap: 1.5rem;
-      justify-content: center;
-      flex-wrap: wrap;
+      gap: 0.9rem;
+      align-items: flex-start;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      line-height: 1.55;
+      color: var(--text-on-dark);
     }
-    .fp-cta-secondary {
+    .dp-expertise-item::before {
+      content: '';
+      flex-shrink: 0;
+      width: 6px;
+      height: 6px;
+      margin-top: 0.55em;
+      border-radius: 50%;
+      background: var(--brand-green);
+    }
+
+    /* ── Credentials ── */
+    .dp-credentials-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+    .dp-credential-heading {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--brand-green);
+      margin-bottom: 1.2rem;
+    }
+    .dp-credential-list { display: flex; flex-direction: column; gap: 1.1rem; }
+    .dp-credential-item {
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      line-height: 1.6;
+      color: var(--text-on-dark);
+      padding-left: 1.1rem;
+      border-left: 2px solid rgba(247, 168, 0, 0.4);
+    }
+    .dp-credential-item strong { color: #fff; font-weight: 600; }
+
+    /* ── Awards ── */
+    .dp-awards-list { display: flex; flex-direction: column; }
+    .dp-award-item {
+      display: flex;
+      gap: 1.2rem;
+      padding: 1.1rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--text-on-dark);
+    }
+    .dp-award-item:last-child { border-bottom: none; }
+    .dp-award-marker {
+      flex-shrink: 0;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(247, 168, 0, 0.12);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ── Selected Projects ── */
+    .dp-project-row {
+      display: grid;
+      grid-template-columns: 48px 1fr auto;
+      gap: 1.4rem;
+      align-items: start;
+      padding: 1.4rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    }
+    .dp-project-row:last-child { border-bottom: none; }
+    .dp-project-num {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--text-muted-dark);
+      padding-top: 0.15rem;
+    }
+    .dp-project-desc {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--text-on-dark);
+    }
+    .dp-project-client {
+      display: block;
+      margin-top: 0.4rem;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+    .dp-project-link {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
+      align-self: center;
       font-family: var(--font-display);
       font-weight: 600;
-      font-size: 0.85rem;
-      letter-spacing: 0.06em;
+      font-size: 0.78rem;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
-      color: #fff;
-      padding: 14px 32px;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      border-radius: 4px;
-      transition: border-color 0.35s ease, color 0.35s ease;
+      color: var(--brand-green);
+      white-space: nowrap;
+      position: relative;
     }
-    .fp-cta-secondary:hover { border-color: var(--brand-green); color: var(--brand-green); }
+    .dp-project-link .arrow { transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
+    .dp-project-link:hover .arrow { transform: translateX(5px); }
+    .dp-project-link:hover { color: var(--accent); }
 
-    .gsap-reveal { opacity: 0; transform: translateY(40px); }
+    /* ── NESPAK accordion (native <details>, open by default: fully
+         readable without JS, and printable) ── */
+    .dp-accordion-group {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .dp-accordion-group:first-child { border-top: 1px solid rgba(255, 255, 255, 0.08); }
+    .dp-accordion-group summary {
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.3rem 0;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: #fff;
+    }
+    .dp-accordion-group summary::-webkit-details-marker { display: none; }
+    .dp-accordion-icon {
+      flex-shrink: 0;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      transition: transform 0.3s ease;
+    }
+    .dp-accordion-group[open] > summary .dp-accordion-icon { transform: rotate(45deg); }
+    .dp-accordion-body {
+      padding: 0 0 1.6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .dp-accordion-body li {
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      line-height: 1.65;
+      color: var(--text-muted);
+      padding-left: 1.1rem;
+      position: relative;
+    }
+    .dp-accordion-body li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.65em;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--text-muted-dark);
+    }
 
-    @media (max-width: 768px) {
-      .fp-pillars-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .fp-avatar { width: 100px; height: 100px; }
-      .fp-avatar-initials { font-size: 2.1rem; }
+    /* ── Speaking / timeline ── */
+    .dp-timeline-item {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 1.6rem;
+      padding: 1.3rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .dp-timeline-item:last-child { border-bottom: none; }
+    .dp-timeline-year {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--accent);
+      padding-top: 0.1rem;
+    }
+    .dp-timeline-desc {
+      font-family: var(--font-body);
+      font-size: 0.93rem;
+      line-height: 1.65;
+      color: var(--text-on-dark);
+    }
+
+    /* ── Teaching / Media (compact paired sections) ── */
+    .dp-pair-section { padding: 6vh 5vw; }
+    .dp-pair-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+    }
+    .dp-pair-block h3 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--brand-green);
+      margin-bottom: 1rem;
+    }
+    .dp-pair-block p {
+      font-family: var(--font-body);
+      font-size: 0.93rem;
+      line-height: 1.7;
+      color: var(--text-muted);
+    }
+    .dp-media-list { display: flex; flex-direction: column; gap: 0.9rem; }
+    .dp-media-list li {
+      font-family: var(--font-body);
+      font-size: 0.93rem;
+      line-height: 1.65;
+      color: var(--text-muted);
+      padding-left: 1.1rem;
+      position: relative;
+    }
+    .dp-media-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.6em;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--brand-green);
+    }
+
+    /* ── Clients strip ── */
+    .dp-clients-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+    .dp-client-logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      padding: 1.6rem 1rem;
+      background: var(--bg-card);
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      text-align: center;
+      min-height: 110px;
+    }
+    .dp-client-logo img {
+      max-height: 40px;
+      max-width: 100%;
+      filter: grayscale(1) brightness(1.6);
+      opacity: 0.75;
+      transition: filter 0.4s ease, opacity 0.4s ease;
+    }
+    .dp-client-logo:hover img {
+      filter: grayscale(0) brightness(1);
+      opacity: 1;
+    }
+    .dp-client-logo span {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--text-muted-dark);
+    }
+
+    /* ── Closing contact band ── */
+    .dp-closing {
+      padding: 9vh 5vw;
+      background: var(--bg-dark);
+      text-align: center;
+    }
+    .dp-closing-inner { max-width: 640px; margin: 0 auto; }
+    .dp-closing-inner h2 {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(1.8rem, 3.6vw, 2.6rem);
+      color: #fff;
+      margin-bottom: 0.4rem;
+      letter-spacing: -0.02em;
+    }
+    .dp-closing-inner .dp-role {
+      justify-content: center;
+      margin-bottom: 1.6rem;
+    }
+    .dp-closing-inner .dp-contact-row {
+      justify-content: center;
+      margin-bottom: 0;
+    }
+
+    /* ── Reveal / motion system ──
+       Content is visible by default. Only once we've confirmed the JS
+       animation engine is actually running (dp-js class + GSAP loaded)
+       do reveal targets get hidden pending their scroll-in animation. */
+    .dp-js .dp-reveal { opacity: 0; transform: translateY(24px); }
+    .dp-js .dp-photo-frame { transform: scale(1); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .dp-js .dp-reveal { opacity: 1 !important; transform: none !important; transition: opacity 0.5s ease; }
+    }
+
+    @media (max-width: 900px) {
+      .dp-hero-inner { grid-template-columns: 1fr; gap: 2.2rem; text-align: left; }
+      .dp-photo-frame { max-width: 240px; }
+      .dp-expertise-grid { grid-template-columns: 1fr; }
+      .dp-credentials-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .dp-pair-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .dp-clients-grid { grid-template-columns: repeat(2, 1fr); }
+      .dp-project-row { grid-template-columns: 36px 1fr; }
+      .dp-project-link { grid-column: 1 / -1; justify-self: start; margin-top: 0.4rem; }
+      .dp-timeline-item { grid-template-columns: 1fr; gap: 0.4rem; }
+    }
+
+    @media (max-width: 480px) {
+      .dp-section { padding: 7vh 6vw; }
+      .dp-clients-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ── Print ──
+       The page is dark-themed by default; printing it as-is would put
+       near-white text on a forced white page. Flatten to a plain light
+       theme instead: white/grey surfaces, dark text everywhere (accents
+       and card backgrounds are informational, not load-bearing, so it's
+       fine to drop them for a submission printout). */
+    @media print {
+      .site-header, .mega-menu, .scroll-to-top { display: none !important; }
+      .dp-reveal, .dp-js .dp-reveal { opacity: 1 !important; transform: none !important; }
+
+      body, body * {
+        color: #111 !important;
+        -webkit-text-fill-color: #111 !important;
+        text-shadow: none !important;
+      }
+      body { background: #fff !important; }
+      .dp-hero, .dp-section, .dp-pair-section, .dp-closing, .site-footer {
+        background: #fff !important;
+      }
+      .dp-section-alt { background: #f5f5f5 !important; }
+      .dp-hero { padding-top: 2rem; }
+      .dp-hero::after { display: none !important; }
+
+      .dp-photo-frame { background: #eee !important; box-shadow: none !important; border: 1px solid #ccc; }
+      .dp-award-marker, .dp-accordion-icon { background: transparent !important; border: 1px solid #999 !important; }
+      .dp-client-logo { background: #fff !important; border: 1px solid #ddd !important; }
+      .dp-client-logo img { filter: none !important; opacity: 1 !important; }
+
+      .dp-expertise-item, .dp-award-item, .dp-project-row, .dp-timeline-item,
+      .dp-accordion-group { border-color: #ddd !important; }
+      .dp-credential-item { border-left-color: #999 !important; }
+
+      .dp-accordion-group { break-inside: avoid; }
+      .dp-project-row, .dp-award-item, .dp-timeline-item { break-inside: avoid; }
     }
   </style>
 </head>
@@ -244,94 +596,393 @@
     </div>
   </div>
 
-  <!-- ============ HERO ============ -->
-  <section class="fp-hero">
-    <div class="fp-hero-inner">
-      <a href="../../index.html#team-section" class="fp-back-link gsap-hero">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        Back to Our Team
-      </a>
-      <span class="fp-eyebrow gsap-hero">Co-Founder &amp; Managing Director</span>
+  <main>
 
-      <div class="fp-avatar gsap-hero">
-        <span class="fp-avatar-initials">FR</span>
+  <!-- ============ HERO ============ -->
+  <header class="dp-hero">
+    <div class="dp-hero-inner">
+      <div class="dp-photo-frame dp-reveal">
+        <img src="../../images/team/fauzia-rizwan.jpg" alt="Fauzia Rizwan, Urban Planner &amp; Policy Expert" class="dp-photo" loading="eager" onerror="this.closest('.dp-photo-frame').classList.add('dp-photo-fallback')">
+        <span class="dp-photo-initials">FR</span>
       </div>
 
-      <h1 class="fp-name gsap-hero">Fauzia Rizwan</h1>
-      <span class="fp-role gsap-hero">Managing Director, The Urban Solutions</span>
-      <p class="fp-tagline gsap-hero">Turning ambitious plans into delivered, livable places &mdash; on time, on budget, without compromise.</p>
+      <div>
+        <a href="../../index.html#team-section" class="dp-back-link dp-reveal">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Back to Our Team
+        </a>
+        <span class="dp-eyebrow dp-reveal">Urban Planner &amp; Policy Expert</span>
+        <h1 class="dp-name dp-reveal">Fauzia Rizwan</h1>
+        <p class="dp-role dp-reveal">Director, The Urban Solutions Pvt. Ltd. &middot; Member, Pakistan Council of Architects &amp; Town Planners (P-668)</p>
+        <div class="dp-contact-row dp-reveal">
+          <a href="mailto:fauzirizwan@gmail.com">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg>
+            fauzirizwan@gmail.com
+          </a>
+          <a href="tel:+923236002200">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            +92-323-6002200
+          </a>
+        </div>
+      </div>
     </div>
-  </section>
+  </header>
 
   <!-- ============ BIO ============ -->
-  <section class="fp-bio-section">
-    <div class="fp-bio-inner">
-      <p class="gsap-reveal">Fauzia Rizwan brings operational mastery and a meticulous eye for detail to every project The Urban Solutions undertakes. As Managing Director, she is the discipline behind the firm's delivery record &mdash; the person who ensures a master plan on paper becomes a functioning, livable community on the ground.</p>
-      <p class="gsap-reveal">She oversees end-to-end project delivery, ensuring timelines, budgets, and quality benchmarks are not just met, but exceeded. That means staying close to every phase of a project &mdash; from the first site survey to the final infrastructure handover &mdash; so nothing is lost in translation between planning and execution.</p>
-      <p class="gsap-reveal">Her ability to harmonize creative ambition with practical execution has been instrumental in building lasting relationships with clients and partners alike. Where design sets the vision, Fauzia builds the systems that get it delivered &mdash; and it's that partnership between vision and execution that defines how The Urban Solutions works.</p>
+  <section class="dp-section" id="bio">
+    <div class="dp-section-inner dp-bio-inner">
+      <span class="dp-section-label dp-reveal">Profile</span>
+      <p class="dp-reveal">Urban planner and policy expert with two decades of practice across master planning, habitat planning, infrastructure services design and land-use policy in Pakistan. Director of The Urban Solutions Pvt. Ltd. and formerly with National Engineering Services Pakistan (NESPAK), where she led planning work on post-earthquake reconstruction, city master plans and national land-use policy.</p>
+      <p class="dp-reveal">Her portfolio spans mega-scale housing schemes for Defence Housing Authority, the Pakistan Air Force and private developers, alongside community-led habitat planning for the Aga Khan Agency for Habitat and water-sensitive urban design for WWF-Pakistan. She works with government, multilateral and academic institutions on regulatory reform, disaster risk reduction and sustainable urban design.</p>
     </div>
   </section>
 
-  <!-- ============ PILLARS ============ -->
-  <section class="fp-pillars-section">
-    <div class="fp-pillars-inner">
-      <span class="fp-pillars-label gsap-reveal">How She Leads</span>
-      <div class="fp-pillars-grid">
-        <div class="fp-pillar gsap-reveal">
-          <h3>Operational Excellence</h3>
-          <p>Owns end-to-end delivery across every active project, keeping timelines, budgets, and quality benchmarks aligned from day one.</p>
+  <!-- ============ AREAS OF EXPERTISE ============ -->
+  <section class="dp-section dp-section-alt" id="expertise">
+    <div class="dp-section-inner">
+      <span class="dp-section-label dp-reveal">Areas of Expertise</span>
+      <h2 class="dp-section-title dp-reveal">Where She Adds Value</h2>
+      <div class="dp-expertise-grid">
+        <div class="dp-expertise-item dp-reveal">Master planning, zoning plans &amp; detailed layout planning</div>
+        <div class="dp-expertise-item dp-reveal">Habitat planning &amp; resettlement of displaced populations</div>
+        <div class="dp-expertise-item dp-reveal">Climate-responsive &amp; disaster-resilient urban development</div>
+        <div class="dp-expertise-item dp-reveal">Infrastructure services design &mdash; water supply, sewerage, drainage</div>
+        <div class="dp-expertise-item dp-reveal">Water-sensitive urban design &amp; green infrastructure</div>
+        <div class="dp-expertise-item dp-reveal">Land-use policy, development frameworks &amp; by-laws</div>
+        <div class="dp-expertise-item dp-reveal">GIS-based spatial analysis &amp; route optimisation</div>
+        <div class="dp-expertise-item dp-reveal">Stakeholder consultation, capacity building &amp; training</div>
+        <div class="dp-expertise-item dp-reveal">Real estate regulatory governance &amp; affordable housing</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CREDENTIALS ============ -->
+  <section class="dp-section" id="credentials">
+    <div class="dp-section-inner">
+      <span class="dp-section-label dp-reveal">Credentials</span>
+      <h2 class="dp-section-title dp-reveal">Education &amp; Memberships</h2>
+      <div class="dp-credentials-grid">
+        <div>
+          <h3 class="dp-credential-heading dp-reveal">Education</h3>
+          <div class="dp-credential-list">
+            <div class="dp-credential-item dp-reveal"><strong>MS Urban &amp; Regional Planning</strong> &mdash; Gold Medallist, School of Civil &amp; Environmental Engineering, NUST, Islamabad, 2014&ndash;18</div>
+            <div class="dp-credential-item dp-reveal"><strong>BSc City &amp; Regional Planning</strong>, University of Engineering &amp; Technology (UET), Lahore, 2002&ndash;2005</div>
+          </div>
         </div>
-        <div class="fp-pillar gsap-reveal">
-          <h3>Quality Assurance</h3>
-          <p>Holds every phase of execution to the same standard the master plan promised &mdash; nothing is signed off until it meets it.</p>
-        </div>
-        <div class="fp-pillar gsap-reveal">
-          <h3>Partnership Building</h3>
-          <p>Built the client and partner relationships that keep The Urban Solutions trusted across repeat, multi-phase engagements.</p>
+        <div>
+          <h3 class="dp-credential-heading dp-reveal">Memberships &amp; Accreditation</h3>
+          <div class="dp-credential-list">
+            <div class="dp-credential-item dp-reveal">Member, Pakistan Council of Architects &amp; Town Planners (P-668)</div>
+            <div class="dp-credential-item dp-reveal">Professional Member, Election Committee, PCATP (2023&ndash;25)</div>
+            <div class="dp-credential-item dp-reveal">Professional Member, Accreditation, PCATP (2022, 2026)</div>
+            <div class="dp-credential-item dp-reveal">Chapter Lead, Conscious Islamabad &mdash; The Centre for Conscious Design</div>
+            <div class="dp-credential-item dp-reveal">Lead, Urbania Internship Program, The Urban Solutions Pvt. Ltd.</div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ STATS ============ -->
-  <section class="fp-stats-section">
-    <div class="fp-stats-inner">
-      <div class="stats-grid">
-        <div class="stat gsap-reveal">
-          <span class="stat-number" data-value="150" data-decimals="0">0</span>
-          <span class="stat-suffix">+</span>
-          <span class="stat-label">Planning Projects</span>
+  <!-- ============ AWARDS ============ -->
+  <section class="dp-section dp-section-alt" id="awards">
+    <div class="dp-section-inner">
+      <span class="dp-section-label dp-reveal">Recognition</span>
+      <h2 class="dp-section-title dp-reveal">Awards &amp; Recognition</h2>
+      <div class="dp-awards-list">
+        <div class="dp-award-item dp-reveal">
+          <span class="dp-award-marker"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15a7 7 0 100-14 7 7 0 000 14z"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></svg></span>
+          <span>Certificate &amp; Shield of Appreciation &mdash; Defence Housing Authority, Quetta; Globiz Avenue, Gwadar</span>
         </div>
-        <div class="stat gsap-reveal">
-          <span class="stat-number" data-value="12" data-decimals="0">0</span>
-          <span class="stat-suffix">yrs</span>
-          <span class="stat-label">Industry Experience</span>
+        <div class="dp-award-item dp-reveal">
+          <span class="dp-award-marker"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15a7 7 0 100-14 7 7 0 000 14z"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></svg></span>
+          <span>Excellence Award, Master Planning of Globiz Avenue, Gwadar &mdash; Globiz Group of Companies, 2022</span>
         </div>
-        <div class="stat gsap-reveal">
-          <span class="stat-number" data-value="200" data-decimals="0">0</span>
-          <span class="stat-suffix">Million</span>
-          <span class="stat-label">Kanal Planned</span>
+        <div class="dp-award-item dp-reveal">
+          <span class="dp-award-marker"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15a7 7 0 100-14 7 7 0 000 14z"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></svg></span>
+          <span>Excellence Award for Outstanding Consultancy Services &mdash; Telegardens ECHS, F-17, Islamabad, 2018</span>
         </div>
-        <div class="stat gsap-reveal">
-          <span class="stat-number" data-value="40" data-decimals="0">0</span>
-          <span class="stat-suffix">M+</span>
-          <span class="stat-label">Housing Units Managed</span>
+        <div class="dp-award-item dp-reveal">
+          <span class="dp-award-marker"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15a7 7 0 100-14 7 7 0 000 14z"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></svg></span>
+          <span>Admirable Services &amp; Contributions Award, Alumni Recognition Ceremony &mdash; Vice Chancellor, UET Lahore, 2018</span>
+        </div>
+        <div class="dp-award-item dp-reveal">
+          <span class="dp-award-marker"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15a7 7 0 100-14 7 7 0 000 14z"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></svg></span>
+          <span>Accelerated promotions &amp; honorariums for outstanding performance &mdash; NESPAK, Islamabad, 2006&ndash;2015</span>
+        </div>
+        <div class="dp-award-item dp-reveal">
+          <span class="dp-award-marker"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15a7 7 0 100-14 7 7 0 000 14z"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></svg></span>
+          <span>Project display &amp; presentation, Master Planning of T&amp;TECHS Islamabad &mdash; International Real Estate Investment Show, ADNEC, Abu Dhabi, 2017</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ CTA ============ -->
-  <section class="fp-cta-section">
-    <div class="fp-cta-inner">
-      <h2 class="gsap-reveal">Meet the Rest of the Team</h2>
-      <p class="gsap-reveal">The Urban Solutions is led jointly with Founder &amp; CEO Syed Rizwan Munir.</p>
-      <div class="fp-cta-links gsap-reveal">
-        <a href="../syed-rizwan-munir/" class="cta-button">Meet Syed Rizwan Munir &rarr;</a>
-        <a href="../../index.html#contact-section" class="fp-cta-secondary">Get In Touch</a>
+  <!-- ============ SELECTED PROJECTS ============ -->
+  <section class="dp-section" id="projects">
+    <div class="dp-section-inner-wide">
+      <span class="dp-section-label dp-reveal">Portfolio</span>
+      <h2 class="dp-section-title dp-reveal">Selected Projects</h2>
+
+      <div class="dp-project-row dp-reveal">
+        <span class="dp-project-num">01</span>
+        <div class="dp-project-desc">Master Plan, cluster-based housing, Ganjabad Village, Immit Valley, Ghizer &mdash; climate-responsive design with water, sewerage, rainwater harvesting<span class="dp-project-client">Aga Khan Agency for Habitat Pakistan</span></div>
+      </div>
+      <div class="dp-project-row dp-reveal">
+        <span class="dp-project-num">02</span>
+        <div class="dp-project-desc">Habitat plan &amp; housing scheme for IDPs of Attabad Lake, Danyore, Gilgit &mdash; disaster-resilient layout<span class="dp-project-client">Aga Khan Building &amp; Planning Services</span></div>
+      </div>
+      <div class="dp-project-row dp-reveal">
+        <span class="dp-project-num">03</span>
+        <div class="dp-project-desc">Vetting of spatial plan for rehabilitation of IDPs, Yasin Valley to Hatoon, Ghizer Valley<span class="dp-project-client">Aga Khan Building &amp; Planning Services</span></div>
+      </div>
+      <div class="dp-project-row dp-reveal">
+        <span class="dp-project-num">04</span>
+        <div class="dp-project-desc">Sustainable landscape &amp; greening plan, James Town, Rawalpindi &amp; Farash Town, Islamabad<span class="dp-project-client">Australia-Pakistan Water Security Initiative; WWF-Pakistan</span></div>
+      </div>
+      <div class="dp-project-row dp-reveal">
+        <span class="dp-project-num">05</span>
+        <div class="dp-project-desc">Zoning plan, master planning &amp; infrastructure design, DHA Phase-X, Lahore (15,000 acres)<span class="dp-project-client">Defence Housing Authority, Lahore</span></div>
+      </div>
+      <div class="dp-project-row dp-reveal">
+        <span class="dp-project-num">06</span>
+        <div class="dp-project-desc">Zoning plan, master planning &amp; infrastructure design, <strong>DHA Quetta</strong> (12,500 acres) &mdash; climate-resilient, greywater reuse<span class="dp-project-client">Defence Housing Authority, Quetta</span></div>
+        <a href="../../casestudies/index.html#cs-2" class="dp-project-link">View Case Study <span class="arrow">&rarr;</span></a>
+      </div>
+      <div class="dp-project-row dp-reveal">
+        <span class="dp-project-num">07</span>
+        <div class="dp-project-desc">Topographic survey, master planning &amp; infrastructure design, DHA Phase-III (3,125 kanals)<span class="dp-project-client">Defence Housing Authority, Islamabad-Rawalpindi</span></div>
+        <a href="../../casestudies/index.html#cs-4" class="dp-project-link">View Case Study <span class="arrow">&rarr;</span></a>
+      </div>
+      <div class="dp-project-row dp-reveal">
+        <span class="dp-project-num">08</span>
+        <div class="dp-project-desc">Master planning &amp; infrastructure design, <strong>Faisal Town</strong> (9,500 acres) &mdash; education city, sports city, trade centre, technology parks<span class="dp-project-client">ZEDEM International, Islamabad</span></div>
+        <a href="../../casestudies/index.html#cs-1" class="dp-project-link">View Case Study <span class="arrow">&rarr;</span></a>
+      </div>
+      <div class="dp-project-row dp-reveal">
+        <span class="dp-project-num">09</span>
+        <div class="dp-project-desc">Topographic survey, master planning &amp; infrastructure design, <strong>Aviation City, Kamra</strong> (1,250 acres) &mdash; golf course, central park, air medical complex<span class="dp-project-client">Pakistan Air Force</span></div>
+        <a href="../../casestudies/index.html#cs-5" class="dp-project-link">View Case Study <span class="arrow">&rarr;</span></a>
+      </div>
+      <div class="dp-project-row dp-reveal">
+        <span class="dp-project-num">10</span>
+        <div class="dp-project-desc">Master planning &amp; infrastructure design, <strong>Citi Housing</strong> Jhelum &mdash; Hyde Park (1,200 acres), Eiffel Tower (650), Emerald Hills (630) &mdash; and Kharian (1,500 acres)<span class="dp-project-client">Citi Housing Jhelum &amp; Kharian</span></div>
+        <a href="../../casestudies/index.html#cs-6" class="dp-project-link">View Case Study <span class="arrow">&rarr;</span></a>
+      </div>
+      <div class="dp-project-row dp-reveal">
+        <span class="dp-project-num">11</span>
+        <div class="dp-project-desc">Topographic survey, master planning, architectural design &amp; construction supervision, CBR ECHS Phase-II<span class="dp-project-client">Central Board of Revenue ECHS</span></div>
       </div>
     </div>
   </section>
+
+  <!-- ============ EARLIER PRACTICE — NESPAK ============ -->
+  <section class="dp-section dp-section-alt" id="experience">
+    <div class="dp-section-inner-wide">
+      <span class="dp-section-label dp-reveal">Earlier Practice</span>
+      <h2 class="dp-section-title dp-reveal">National Engineering Services Pakistan (NESPAK), Islamabad</h2>
+
+      <div id="dp-nespak-accordion">
+        <details class="dp-accordion-group dp-reveal" open>
+          <summary>New Balakot City Development Project <span class="dp-accordion-icon">+</span></summary>
+          <ul class="dp-accordion-body">
+            <li>Master planning of New Balakot City; communication strategy, field visits and questionnaire design; monthly activity reports</li>
+            <li>Socio-economic and commercial survey of Old Balakot Town; data analysis and planning parameters</li>
+            <li>Alternate zoning plans; Existing Studies Report (Volumes I &amp; II); umbrella PC-I and building by-laws</li>
+            <li>Intersection mitigation measures report and re-alignment of Mental Road feasibility study</li>
+            <li>Land-use policy formulation and master planning documentation aligned to MDG-2015 and the ERRA Build Back Better approach</li>
+            <li>Presentations to the President of Pakistan (21 May 2007) and the Prime Minister of Pakistan (30 April 2008)</li>
+          </ul>
+        </details>
+
+        <details class="dp-accordion-group dp-reveal">
+          <summary>Old Balakot Town <span class="dp-accordion-icon">+</span></summary>
+          <ul class="dp-accordion-body">
+            <li>Master planning and design; existing scenario study, analysis and interpretation of data</li>
+            <li>Peripheral development plan and development policy; improvement plan and urban policy development framework</li>
+            <li>Team member, ERRA-NESPAK housing re-survey &mdash; census data arrangement, unique ID issuance and analysis</li>
+            <li>Resettlement strategy and compensation mechanism for affectees of Old Balakot Town and Bakriyal</li>
+          </ul>
+        </details>
+
+        <details class="dp-accordion-group dp-reveal">
+          <summary>Bagh City Development Project &mdash; Micro-Planning <span class="dp-accordion-icon">+</span></summary>
+          <ul class="dp-accordion-body">
+            <li>Micro-planning of the proposed master plan, mainstreaming disaster risk reduction under the Hyogo Framework for Action 2005&ndash;2015</li>
+            <li>Socio-economic survey for needs assessment; master planning, detailed layout and reconstruction plans based on micro-zonation and seismic infrastructure design</li>
+            <li>Sectoral land-use planning policies and action-area development strategies</li>
+            <li>Planning and design of Sahalian Resettlement Colony for earthquake affectees</li>
+            <li>Bagh transportation plan and street/slum improvement plan; conservation of historical places, sewerage and drainage, tourism and parks, flood protection</li>
+          </ul>
+        </details>
+
+        <details class="dp-accordion-group dp-reveal">
+          <summary>Rawalakot Master Plan <span class="dp-accordion-icon">+</span></summary>
+          <ul class="dp-accordion-body">
+            <li>Data collection and analysis; GIS-based existing scenario profiling and diagnostic studies report</li>
+            <li>Master plan and development policy for a 25-year plan period</li>
+            <li>Implementation strategy report &mdash; capacity building, statutory framework, project phasing and by-laws</li>
+          </ul>
+        </details>
+
+        <details class="dp-accordion-group dp-reveal">
+          <summary>Comprehensive City Boundary, Rawalpindi <span class="dp-accordion-icon">+</span></summary>
+          <ul class="dp-accordion-body">
+            <li>Direction of growth and demarcation of a comprehensive 20-year city boundary</li>
+            <li>Communication strategy and stakeholder consultations; primary and secondary data collection</li>
+            <li>GIS-based land-use analysis and development pattern plans using advanced statistical tools</li>
+            <li>Policy guidelines for future growth; inception, consultation and final reports</li>
+          </ul>
+        </details>
+
+        <details class="dp-accordion-group dp-reveal">
+          <summary>National Safer Land Use Plan of Pakistan <span class="dp-accordion-icon">+</span></summary>
+          <ul class="dp-accordion-body">
+            <li>Preparation of the plan with NDMA, SUPARCO and Survey of Pakistan</li>
+            <li>Drafted terms of reference to mainstream disaster risk reduction and climate change adaptation in urban planning practice</li>
+            <li>Organised Working Group consultative sessions on the plan at NESPAK House, Islamabad</li>
+          </ul>
+        </details>
+
+        <details class="dp-accordion-group dp-reveal">
+          <summary>Iran-Pakistan Gas Pipeline Project (ISGS) <span class="dp-accordion-icon">+</span></summary>
+          <ul class="dp-accordion-body">
+            <li>GIS-based land-use mapping for route optimisation of 800 km of pipeline through Balochistan and Sindh</li>
+            <li>Land-use constraints report for the route optimisation stage and land-use report of the finalised route</li>
+          </ul>
+        </details>
+
+        <details class="dp-accordion-group dp-reveal">
+          <summary>WASH Needs Assessment, UNICEF <span class="dp-accordion-icon">+</span></summary>
+          <ul class="dp-accordion-body">
+            <li>Baseline water, sanitation and hygiene conditions in six districts of Khyber Pakhtunkhwa</li>
+            <li>Data compilation and analysis; needs assessment report and GIS-based existing scenario profiles</li>
+            <li>Interim report and interventions reports</li>
+          </ul>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SPEAKING, SEMINARS & POLICY ENGAGEMENT ============ -->
+  <section class="dp-section" id="speaking">
+    <div class="dp-section-inner">
+      <span class="dp-section-label dp-reveal">Public Engagement</span>
+      <h2 class="dp-section-title dp-reveal">Speaking, Seminars &amp; Policy Engagement</h2>
+
+      <div class="dp-timeline-item dp-reveal">
+        <span class="dp-timeline-year">2025</span>
+        <p class="dp-timeline-desc">ISOCARP World Planning Congress, Riyadh, 1&ndash;4 December. Participated in the Do-Track and New Cities Manifesto sessions; study visits to Qiddiya City and Boulevard World.</p>
+      </div>
+      <div class="dp-timeline-item dp-reveal">
+        <span class="dp-timeline-year">2025</span>
+        <p class="dp-timeline-desc">RERA policy roundtable, Centre for Innovation in Real Estate. High-level roundtable on regulatory governance and reform in Pakistan's real estate sector, with the Government of Punjab, PCBDDA, a World Bank consultant, PHATA, LDA and leading developers.</p>
+      </div>
+      <div class="dp-timeline-item dp-reveal">
+        <span class="dp-timeline-year">2025</span>
+        <p class="dp-timeline-desc">Guest speaker, CPD seminar on &ldquo;Sustainable Urban Planning and Design&rdquo;, Department of Civil Engineering, COMSATS University Wah Campus, 24 September.</p>
+      </div>
+      <div class="dp-timeline-item dp-reveal">
+        <span class="dp-timeline-year">2025&ndash;26</span>
+        <p class="dp-timeline-desc">ORIC Steering Committee, UET Lahore. Expertise in urban development and sustainable solutions applied to industry-academia collaboration.</p>
+      </div>
+      <div class="dp-timeline-item dp-reveal">
+        <span class="dp-timeline-year">2025</span>
+        <p class="dp-timeline-desc">Engagements with the Pakistan Institute of Development Economics (PIDE) on urbanisation; World Town Planning Day celebrations hosted in office; International Women's Day 2025.</p>
+      </div>
+      <div class="dp-timeline-item dp-reveal">
+        <span class="dp-timeline-year">2024</span>
+        <p class="dp-timeline-desc">Guest speaker on urban regeneration, PIDE ECONFEST, 25 May.</p>
+      </div>
+      <div class="dp-timeline-item dp-reveal">
+        <span class="dp-timeline-year">2020&ndash;21</span>
+        <p class="dp-timeline-desc">Chapter Lead, Conscious Islamabad. Moderated the Conscious Cities Festival 2021 &mdash; &ldquo;The Person Space Continuum: Inclusive &amp; Livable Islamabad&rdquo;.</p>
+      </div>
+      <div class="dp-timeline-item dp-reveal">
+        <span class="dp-timeline-year">2018</span>
+        <p class="dp-timeline-desc">&ldquo;Framework for Comparative Analysis of Options for Affordable Housing&rdquo;, National Seminar on the Five Million Houses Programme, UET Lahore.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TEACHING + MEDIA ============ -->
+  <section class="dp-pair-section dp-section-alt">
+    <div class="dp-pair-grid">
+      <div class="dp-pair-block" id="teaching">
+        <h3 class="dp-reveal">Teaching</h3>
+        <p class="dp-reveal">Guest lecturer at NUST Islamabad, UET Lahore, and the National College of Arts, Rawalpindi. Leads the Urbania Internship Program at The Urban Solutions Pvt. Ltd.</p>
+      </div>
+      <div class="dp-pair-block" id="media">
+        <h3 class="dp-reveal">Media &amp; Broadcast</h3>
+        <ul class="dp-media-list">
+          <li class="dp-reveal">Invited guest on state television to speak on urban issues and agendas, 2025</li>
+          <li class="dp-reveal">Interview with HADI Worldwide as a practising woman urban planner, with guidance for students and young women entering the profession</li>
+          <li class="dp-reveal">Featured in the PIDE-RASTA research documentary series, &ldquo;Rethinking Mobility in Pakistan&rdquo;, 2022</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CLIENTS & INSTITUTIONAL PARTNERS ============ -->
+  <section class="dp-section" id="clients">
+    <div class="dp-section-inner-wide">
+      <span class="dp-section-label dp-reveal">Trusted By</span>
+      <h2 class="dp-section-title dp-reveal">Clients &amp; Institutional Partners</h2>
+      <div class="dp-clients-grid">
+        <div class="dp-client-logo dp-reveal">
+          <img src="../../images/team/clients/defence-housing-authority.png" alt="Defence Housing Authority" loading="lazy" onerror="this.style.display='none'">
+          <span>Defence Housing Authority</span>
+        </div>
+        <div class="dp-client-logo dp-reveal">
+          <img src="../../images/team/clients/pakistan-air-force.png" alt="Pakistan Air Force" loading="lazy" onerror="this.style.display='none'">
+          <span>Pakistan Air Force</span>
+        </div>
+        <div class="dp-client-logo dp-reveal">
+          <img src="../../images/team/clients/aga-khan-agency-habitat.png" alt="Aga Khan Agency for Habitat" loading="lazy" onerror="this.style.display='none'">
+          <span>Aga Khan Agency for Habitat</span>
+        </div>
+        <div class="dp-client-logo dp-reveal">
+          <img src="../../images/team/clients/nespak.png" alt="NESPAK" loading="lazy" onerror="this.style.display='none'">
+          <span>NESPAK</span>
+        </div>
+        <div class="dp-client-logo dp-reveal">
+          <img src="../../images/team/clients/wwf-pakistan.png" alt="WWF-Pakistan" loading="lazy" onerror="this.style.display='none'">
+          <span>WWF-Pakistan</span>
+        </div>
+        <div class="dp-client-logo dp-reveal">
+          <img src="../../images/team/clients/government-of-punjab.png" alt="Government of Punjab" loading="lazy" onerror="this.style.display='none'">
+          <span>Government of Punjab</span>
+        </div>
+        <div class="dp-client-logo dp-reveal">
+          <img src="../../images/team/clients/uet-lahore.png" alt="UET Lahore" loading="lazy" onerror="this.style.display='none'">
+          <span>UET Lahore</span>
+        </div>
+        <div class="dp-client-logo dp-reveal">
+          <img src="../../images/team/clients/nust-islamabad.png" alt="NUST Islamabad" loading="lazy" onerror="this.style.display='none'">
+          <span>NUST Islamabad</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CLOSING CONTACT BAND ============ -->
+  <section class="dp-closing">
+    <div class="dp-closing-inner">
+      <h2 class="dp-reveal">Fauzia Rizwan</h2>
+      <p class="dp-role dp-reveal">Urban Planner &amp; Policy Expert &middot; Director, The Urban Solutions Pvt. Ltd.</p>
+      <div class="dp-contact-row dp-reveal">
+        <a href="mailto:fauzirizwan@gmail.com">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg>
+          fauzirizwan@gmail.com
+        </a>
+        <a href="tel:+923236002200">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          +92-323-6002200
+        </a>
+      </div>
+    </div>
+  </section>
+
+  </main>
 
   <!-- FOOTER / CONTACT -->
   <footer class="site-footer" id="contact-section">
@@ -372,89 +1023,113 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
 
   <script>
-    // 1. Initialize Lenis for Smooth Scrolling
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      direction: 'vertical',
-      gestureDirection: 'vertical',
-      smooth: true,
-      mouseMultiplier: 1,
-      smoothTouch: false,
-      touchMultiplier: 2,
-      infinite: false,
-    });
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
+    (function () {
+      "use strict";
 
-    // 2. GSAP Animations
-    gsap.registerPlugin(ScrollTrigger);
+      // If the CDN scripts failed to load for any reason, drop the
+      // reveal-gating class immediately so content stays visible.
+      if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined" || typeof Lenis === "undefined") {
+        document.documentElement.classList.remove("dp-js");
+        return;
+      }
 
-    // Hero Entry Animation
-    gsap.from(".gsap-hero", {
-      y: 60,
-      opacity: 0,
-      duration: 1.2,
-      stagger: 0.15,
-      ease: "power3.out",
-      delay: 0.2
-    });
+      var prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    // Scroll Reveals
-    document.querySelectorAll(".gsap-reveal").forEach((el) => {
-      gsap.to(el, {
-        scrollTrigger: {
-          trigger: el,
-          start: "top 85%",
-        },
-        y: 0,
-        opacity: 1,
-        duration: 1,
-        ease: "power3.out"
+      // 1. Lenis smooth scroll, synced to GSAP's ticker so ScrollTrigger
+      //    always reads the interpolated scroll position (not the native
+      //    scrollTop, which Lenis overrides) — matches js/app.js.
+      var lenis = new Lenis({
+        duration: 1.2,
+        easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
+        smoothWheel: true,
       });
-    });
+      lenis.on("scroll", ScrollTrigger.update);
+      gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
+      gsap.ticker.lagSmoothing(0);
 
-    // Counter Animations
-    document.querySelectorAll(".stat-number").forEach((el) => {
-      const target = parseFloat(el.dataset.value);
-      const decimals = parseInt(el.dataset.decimals || "0");
-      const obj = { val: 0 };
-      ScrollTrigger.create({
-        trigger: el,
-        start: "top 90%",
-        once: true,
-        onEnter: () => {
-          gsap.to(obj, {
-            val: target,
-            duration: 2,
+      gsap.registerPlugin(ScrollTrigger);
+
+      if (prefersReducedMotion) {
+        // Fallback: simple opacity fade, no transform/parallax at all.
+        gsap.set(".dp-reveal", { opacity: 1, y: 0 });
+        gsap.utils.toArray(".dp-reveal").forEach(function (el) {
+          gsap.from(el, {
+            opacity: 0,
+            duration: 0.5,
             ease: "power1.out",
-            onUpdate: () => {
-              el.textContent = decimals === 0 ? Math.round(obj.val) : obj.val.toFixed(decimals);
-            },
+            scrollTrigger: { trigger: el, start: "top 90%" },
           });
-        },
-      });
-    });
-
-    // Mobile Menu Toggle
-    const menuBtn = document.getElementById('mobile-menu-btn');
-    const megaMenu = document.getElementById('mega-menu');
-    if (menuBtn && megaMenu) {
-      menuBtn.addEventListener('click', () => {
-        menuBtn.classList.toggle('is-open');
-        megaMenu.classList.toggle('is-open');
-      });
-      const menuLinks = megaMenu.querySelectorAll('.mega-link');
-      menuLinks.forEach(link => {
-        link.addEventListener('click', () => {
-          menuBtn.classList.remove('is-open');
-          megaMenu.classList.remove('is-open');
         });
+      } else {
+        // Hero entrance — fromTo (not from) so the animated-to values are
+        // explicit rather than auto-read from the element's current style,
+        // which is already opacity:0/translateY(24px) via the .dp-js CSS
+        // gate above; .from() would otherwise animate 0 -> 0 (no-op).
+        gsap.fromTo(".dp-hero .dp-reveal",
+          { y: 24, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.6, stagger: 0.08, ease: "power2.out", delay: 0.1 }
+        );
+
+        // Subtle parallax/scale on the hero portrait only
+        gsap.to(".dp-photo", {
+          scale: 1.05,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".dp-hero",
+            start: "top top",
+            end: "bottom top",
+            scrub: 1,
+          },
+        });
+
+        // Scroll reveals for every other section — fade + slight rise,
+        // staggered when several sit inside the same block.
+        document.querySelectorAll(".dp-section, .dp-pair-section, .dp-closing").forEach(function (sec) {
+          var reveals = sec.querySelectorAll(".dp-reveal");
+          if (!reveals.length) return;
+          gsap.to(reveals, {
+            scrollTrigger: { trigger: sec, start: "top 85%" },
+            y: 0,
+            opacity: 1,
+            duration: 0.6,
+            stagger: 0.08,
+            ease: "power2.out",
+          });
+        });
+      }
+
+      // Force NESPAK accordion fully open for a clean print/PDF export,
+      // and restore whatever the reader had open/closed afterwards. Fires
+      // on the real browser Print flow (Ctrl+P / File > Print > Save as
+      // PDF), which is what a reader printing this page actually uses —
+      // native <details> hides its body via an internal mechanism (not
+      // plain CSS `display`) that can't be forced open from a stylesheet.
+      var accordionDetails = document.querySelectorAll("#dp-nespak-accordion details");
+      var openBeforePrint = [];
+      window.addEventListener("beforeprint", function () {
+        openBeforePrint = Array.prototype.map.call(accordionDetails, function (d) { return d.open; });
+        accordionDetails.forEach(function (d) { d.open = true; });
       });
-    }
+      window.addEventListener("afterprint", function () {
+        accordionDetails.forEach(function (d, i) { d.open = openBeforePrint[i]; });
+      });
+
+      // Mobile Menu Toggle
+      var menuBtn = document.getElementById("mobile-menu-btn");
+      var megaMenu = document.getElementById("mega-menu");
+      if (menuBtn && megaMenu) {
+        menuBtn.addEventListener("click", function () {
+          menuBtn.classList.toggle("is-open");
+          megaMenu.classList.toggle("is-open");
+        });
+        megaMenu.querySelectorAll(".mega-link").forEach(function (link) {
+          link.addEventListener("click", function () {
+            menuBtn.classList.remove("is-open");
+            megaMenu.classList.remove("is-open");
+          });
+        });
+      }
+    })();
   </script>
 </body>
 </html>
