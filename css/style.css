@@ -993,3 +993,34 @@ img { max-width: 100%; display: block; }
   .stat-number { font-size: clamp(2rem, 10vw, 3rem); }
   .team-card { padding: 2rem 1.5rem; }
 }
+
+/* ═══════════════════════════════════════════════════
+   PROFILE PAGE — Heyzine Flipbook Embed
+   ═══════════════════════════════════════════════════ */
+.flipbook-card {
+  max-width: 900px;
+  margin: 0 auto;
+}
+.flipbook-embed {
+  position: relative;
+  width: 100%;
+  /* Ratio taken from Heyzine's snippet: 100% width against a 396px
+     height at this card's 900px max-width. */
+  aspect-ratio: 900 / 396;
+  background: var(--bg-dark);
+  border-radius: 8px;
+  overflow: hidden;
+}
+@supports not (aspect-ratio: 1 / 1) {
+  .flipbook-embed {
+    height: 0;
+    padding-top: 44%; /* 396 / 900, for browsers without aspect-ratio support */
+  }
+}
+.flipbook-embed .fp-iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 1px solid lightgray;
+}
