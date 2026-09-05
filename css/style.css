@@ -210,6 +210,17 @@ img { max-width: 100%; display: block; }
   background: var(--bg-dark);
 }
 
+/* Everything visual lives in this inner box, kept full-bleed by default.
+   On mobile it gets inset from the section's edges (see media query below)
+   so the slider reads as a contained card instead of touching the screen
+   edges — the outer .hero-slider stays untouched (full-bleed, 100vh) so
+   GSAP's ScrollTrigger pin math (app.js) is unaffected by the inset. */
+.hero-slider-inner {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
 /* Background layer — crossfades continuously with scroll (JS-driven opacity) */
 .hero-slide-media {
   position: absolute;
@@ -927,6 +938,14 @@ img { max-width: 100%; display: block; }
   .mobile-menu-btn { display: flex; }
 
   .hero-logo-container { display: none; } /* casestudies hero */
+
+  /* Hero slider — contained card, inset from the screen edges with
+     rounded corners, so it reads as a bounded box rather than full-bleed */
+  .hero-slider-inner {
+    inset: 12px;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+  }
 
   /* Hero slider — tighter arrow inset, higher up to clear the taller
      (3-line desc) text block, dots row clears the CTA below it */
