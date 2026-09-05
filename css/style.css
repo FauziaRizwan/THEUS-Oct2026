@@ -998,17 +998,26 @@ img { max-width: 100%; display: block; }
    PROFILE PAGE — Heyzine Flipbook Embed
    ═══════════════════════════════════════════════════ */
 .flipbook-card {
-  max-width: 900px;
-  margin: 0 auto;
+  /* Break out of .container's max-width/padding to span the full viewport. */
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 0;
+}
+.flipbook-card:hover {
+  transform: none;
 }
 .flipbook-embed {
   position: relative;
   width: 100%;
   /* Ratio taken from Heyzine's snippet: 100% width against a 396px
-     height at this card's 900px max-width. */
+     height at this card's original 900px design width. */
   aspect-ratio: 900 / 396;
   background: var(--bg-dark);
-  border-radius: 8px;
   overflow: hidden;
 }
 @supports not (aspect-ratio: 1 / 1) {
