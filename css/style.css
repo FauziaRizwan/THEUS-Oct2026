@@ -1033,3 +1033,22 @@ img { max-width: 100%; display: block; }
   height: 100%;
   border: 1px solid lightgray;
 }
+
+/* On narrow screens, the 900:396 desktop ratio becomes so short that
+   Heyzine's own book (which keeps its own document aspect ratio and
+   letterboxes inside whatever box it's given) renders tiny with big
+   empty gutters. Switch to a much taller box so height stops being the
+   limiting dimension and the book scales up to fill the full width. */
+@media (max-width: 768px) {
+  .flipbook-embed {
+    aspect-ratio: auto;
+    height: 80vh;
+    min-height: 420px;
+  }
+}
+@media (max-width: 480px) {
+  .flipbook-embed {
+    height: 75vh;
+    min-height: 380px;
+  }
+}
