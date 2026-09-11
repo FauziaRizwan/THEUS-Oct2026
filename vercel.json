@@ -1,4 +1,16 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/team/fauzia-rizwan",
+      "destination": "/fauziarizwan",
+      "permanent": true
+    },
+    {
+      "source": "/team/fauzia-rizwan/:path*",
+      "destination": "/fauziarizwan",
+      "permanent": true
+    }
+  ]
 }
