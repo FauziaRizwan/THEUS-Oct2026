@@ -897,6 +897,20 @@ img { max-width: 100%; display: block; }
   color: var(--text-muted-dark);
   letter-spacing: 0.04em;
 }
+.footer-bottom p.footer-credit {
+  margin-top: 1.25rem;
+  font-size: 0.68rem;
+  text-align: left;
+}
+.footer-credit a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.3s ease;
+}
+.footer-credit a:hover {
+  color: var(--brand-green);
+}
 
 /* ═══════════════════════════════════════════════════
    BELOW-SCROLL SECTION ANIMATIONS (IntersectionObserver)
