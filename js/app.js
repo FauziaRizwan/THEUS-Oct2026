@@ -249,6 +249,25 @@
 
     revealElements.forEach((el) => observer.observe(el));
     cards.forEach((el) => observer.observe(el));
+
+    // Process flow: steps draw in sequentially, then the connectors animate
+    const flow = document.getElementById("process-flow");
+    if (flow) {
+      flow.querySelectorAll(".process-step").forEach((step, i) => {
+        step.style.setProperty("--i", i);
+        step.style.transitionDelay = `${i * 0.45}s`;
+      });
+      const flowObserver = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting) {
+            flow.classList.add("revealed");
+            flowObserver.disconnect();
+          }
+        },
+        { threshold: 0.25 }
+      );
+      flowObserver.observe(flow);
+    }
   }
 
   // ═══════════════════════════════════════════════════
