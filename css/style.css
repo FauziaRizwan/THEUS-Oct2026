@@ -476,7 +476,8 @@ img { max-width: 100%; display: block; }
   font-size: clamp(3rem, 5vw, 5rem);
   line-height: 1;
   color: var(--text-on-dark);
-  display: inline;
+  display: inline-block; /* min-width reserved by app.js counters */
+  font-variant-numeric: tabular-nums;
 }
 .stat-suffix {
   font-family: var(--font-display);

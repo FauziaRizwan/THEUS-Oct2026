@@ -181,6 +181,19 @@
     const counters = document.querySelectorAll(".stat-number");
     if (!counters.length) return;
 
+    // Reserve each number's final width (in em, so it scales with the
+    // clamp() font size) before counting starts. Otherwise the growing
+    // digits re-wrap the suffix mid-count, changing the section's height
+    // every few frames and making the whole page jitter while scrolling.
+    counters.forEach((el) => {
+      const decimals = parseInt(el.dataset.decimals || "0");
+      const initial = el.textContent;
+      el.textContent = parseFloat(el.dataset.value).toFixed(decimals);
+      const fontSize = parseFloat(getComputedStyle(el).fontSize);
+      el.style.minWidth = el.getBoundingClientRect().width / fontSize + "em";
+      el.textContent = initial;
+    });
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -337,6 +350,7 @@
     lenis.stop();
 
     await preloadHeroImages();
+    await document.fonts.ready; // counters measure text widths in the real font
 
     // Hide loader
     loader.classList.add("hidden");
